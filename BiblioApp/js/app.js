@@ -6,17 +6,17 @@
  */
 
 const SEKTIONEN = {
-    medien:    { titel: 'Medien',    sub: 'GET /media' },
-    kunden:    { titel: 'Kunden',    sub: 'GET /customers' },
-    adressen:  { titel: 'Adressen',  sub: 'GET /addresses' },
-    ausleihen: { titel: 'Ausleihen', sub: 'GET /borrowings' }
+    medien:    { titel: 'Medien',     },
+    kunden:    { titel: 'Kunden',     },
+    adressen:  { titel: 'Adressen',   },
+    ausleihen: { titel: 'Ausleihen',  }
 };
 
 async function switchSektion(sektionId) {
     navigateTo(sektionId);
     const info = SEKTIONEN[sektionId];
     document.getElementById('topbar-titel').textContent      = info.titel;
-    document.getElementById('topbar-untertitel').textContent = info.sub;
+    document.getElementById('topbar-untertitel').textContent = '';
     if (sektionId === 'medien')    await renderMedien();
     if (sektionId === 'kunden')    await renderKunden();
     if (sektionId === 'adressen')  await renderAdressen();
