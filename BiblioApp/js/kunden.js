@@ -232,3 +232,17 @@ function confirmDeleteKunde(id, name) {
         } catch (err) { showToast('Loeschen fehlgeschlagen: ' + err.message, 'error'); }
     });
 }
+
+/**
+ * Sucht Kunden nach Nachname und aktualisiert die Tabelle.
+ * @async
+ * @returns {Promise<void>}
+ */
+async function searchKunden() {
+    const suchbegriff = document.getElementById('kunden-suche').value.trim();
+    if (suchbegriff.length === 0) { renderKundenTabelle(kundenListe); return; }
+    try {
+        const ergebnis = await sendRequest('/customers/search/lastname/' + encodeURIComponent(suchbegriff));
+        renderKundenTabelle(ergebnis);
+    } catch (err) { showToast('Suche fehlgeschlagen', 'error'); }
+}

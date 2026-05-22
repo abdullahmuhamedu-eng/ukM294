@@ -13,6 +13,26 @@ const SEKTIONEN = {
 };
 
 /**
+ * Laedt alle Stats-Zahlen fuer die Karten im Header.
+ * @async
+ * @returns {Promise<void>}
+ */
+async function ladeStats() {
+    try {
+        const medien    = await getMedien();
+        updateStat('stat-medien', medien.length);
+    } catch (err) { updateStat('stat-medien', '?'); }
+    try {
+        const kunden    = await getKunden();
+        updateStat('stat-kunden', kunden.length);
+    } catch (err) { updateStat('stat-kunden', '?'); }
+    try {
+        const ausleihen = await getAusleihen();
+        updateStat('stat-ausleihen', ausleihen.length);
+    } catch (err) { updateStat('stat-ausleihen', '?'); }
+}
+
+/**
  * Wechselt zur angegebenen Sektion und laedt die Daten.
  * @async
  * @param {string} sektionId - ID der Sektion
@@ -131,12 +151,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (e.key === 'Escape') hideAllModals();
     });
 
-    // Startseite laden + alle Stats laden
+    // Nur Medien laden beim Start, Stats separat
     await renderMedien();
-    await renderKunden();
-    await renderAusleihen();
-    navigateTo('medien');
-    document.getElementById('topbar-titel').textContent = 'Medien';
-    document.querySelector('[data-section="medien"]').classList.add('is-active');
+    ladeStats();
 });
 
