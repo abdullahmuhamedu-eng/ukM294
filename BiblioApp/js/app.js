@@ -6,23 +6,32 @@
  */
 
 const SEKTIONEN = {
-    medien:    { titel: 'Medien',     },
-    kunden:    { titel: 'Kunden',     },
-    adressen:  { titel: 'Adressen',   },
-    ausleihen: { titel: 'Ausleihen',  }
+    medien:    { titel: 'Medien' },
+    kunden:    { titel: 'Kunden' },
+    adressen:  { titel: 'Adressen' },
+    ausleihen: { titel: 'Ausleihen' }
 };
 
+/**
+ * Wechselt zur angegebenen Sektion und lädt die Daten.
+ * @async
+ * @param {string} sektionId - ID der Sektion (medien, kunden, adressen, ausleihen)
+ * @returns {Promise<void>}
+ */
 async function switchSektion(sektionId) {
     navigateTo(sektionId);
-    const info = SEKTIONEN[sektionId];
-    document.getElementById('topbar-titel').textContent      = info.titel;
-    document.getElementById('topbar-untertitel').textContent = '';
+    document.getElementById('topbar-titel').textContent = SEKTIONEN[sektionId].titel;
     if (sektionId === 'medien')    await renderMedien();
     if (sektionId === 'kunden')    await renderKunden();
     if (sektionId === 'adressen')  await renderAdressen();
     if (sektionId === 'ausleihen') await renderAusleihen();
 }
 
+/**
+ * Öffnet das passende Erstellen-Modal für die aktive Sektion.
+ * @async
+ * @returns {Promise<void>}
+ */
 async function openNeuModal() {
     const aktiv = document.querySelector('.sektion:not(.is-hidden)');
     if (!aktiv) return;
@@ -34,30 +43,37 @@ async function openNeuModal() {
 
 document.addEventListener('DOMContentLoaded', async function() {
 
+    // Navigation
     document.querySelectorAll('.nav-item').forEach(function(btn) {
         btn.addEventListener('click', function() { switchSektion(this.dataset.section); });
     });
 
     document.getElementById('btn-neu').addEventListener('click', openNeuModal);
 
+    // Modal Medium
     document.getElementById('medium-modal-close').addEventListener('click',  function() { hideModal('medium-modal'); });
     document.getElementById('medium-modal-cancel').addEventListener('click', function() { hideModal('medium-modal'); });
     document.getElementById('medium-modal-save').addEventListener('click',   saveMedium);
 
+    // Modal Kunde
     document.getElementById('kunde-modal-close').addEventListener('click',  closeKundeModal);
     document.getElementById('kunde-modal-cancel').addEventListener('click', closeKundeModal);
     document.getElementById('kunde-modal-save').addEventListener('click',   saveKunde);
 
+    // Modal Adresse
     document.getElementById('adresse-modal-close').addEventListener('click',  function() { hideModal('adresse-modal'); });
     document.getElementById('adresse-modal-cancel').addEventListener('click', function() { hideModal('adresse-modal'); });
     document.getElementById('adresse-modal-save').addEventListener('click',   saveAdresse);
 
+    // Modal Ausleihe
     document.getElementById('ausleihe-modal-close').addEventListener('click',  function() { hideModal('ausleihe-modal'); });
     document.getElementById('ausleihe-modal-cancel').addEventListener('click', function() { hideModal('ausleihe-modal'); });
     document.getElementById('ausleihe-modal-save').addEventListener('click',   saveAusleihe);
 
+    // Suche Medien
     document.getElementById('medien-suche').addEventListener('input', searchMedien);
 
+    // Event-Delegation Medien
     document.getElementById('medien-tbody').addEventListener('click', function(e) {
         const btn = e.target.closest('button[data-action]');
         if (!btn) return;
@@ -67,6 +83,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (btn.dataset.action === 'delete-medium') confirmDeleteMedium(id, name);
     });
 
+    // Event-Delegation Kunden
     document.getElementById('kunden-tbody').addEventListener('click', function(e) {
         const btn = e.target.closest('button[data-action]');
         if (!btn) return;
@@ -76,6 +93,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (btn.dataset.action === 'delete-kunde') confirmDeleteKunde(id, name);
     });
 
+    // Event-Delegation Adressen
     document.getElementById('adressen-tbody').addEventListener('click', function(e) {
         const btn = e.target.closest('button[data-action]');
         if (!btn) return;
@@ -85,6 +103,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (btn.dataset.action === 'delete-adresse') confirmDeleteAdresse(id, name);
     });
 
+    // Event-Delegation Ausleihen
     document.getElementById('ausleihen-tbody').addEventListener('click', function(e) {
         const btn = e.target.closest('button[data-action]');
         if (!btn) return;
@@ -95,6 +114,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (btn.dataset.action === 'delete-ausleihe') confirmDeleteAusleihe(id);
     });
 
+    // Klick ausserhalb Modal schliesst es
     document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
         overlay.addEventListener('click', function(e) {
             if (e.target === overlay && overlay.id !== 'confirm-modal') {
@@ -103,9 +123,11 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
     });
 
+    // Escape schliesst alle Modals
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') hideAllModals();
     });
 
     await renderMedien();
 });
+

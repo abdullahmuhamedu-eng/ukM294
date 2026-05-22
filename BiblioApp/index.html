@@ -7,39 +7,44 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
 <div id="toast-container" class="toast-container"></div>
+
+<!-- Bestätigungsdialog -->
 <div id="confirm-modal" class="modal-overlay is-hidden">
   <div class="confirm-box">
-    <h3 id="confirm-titel">Bestaetigen?</h3>
+    <h3 id="confirm-titel">Bestätigen?</h3>
     <p  id="confirm-text">Sind Sie sicher?</p>
     <div class="confirm-actions">
       <button id="confirm-nein" class="btn btn--secondary">Abbrechen</button>
-      <button id="confirm-ja"   class="btn btn--danger">Ja, bestaetigen</button>
+      <button id="confirm-ja"   class="btn btn--danger">Ja, bestätigen</button>
     </div>
   </div>
 </div>
+
+<!-- Modal: Medium -->
 <div id="medium-modal" class="modal-overlay is-hidden">
   <div class="modal">
     <div class="modal-header">
       <h2 id="medium-modal-titel">Medium</h2>
-      <button id="medium-modal-close" class="modal-close">x</button>
+      <button id="medium-modal-close" class="modal-close">&times;</button>
     </div>
     <div class="modal-body">
       <form id="medium-form">
         <div class="form-group">
           <label class="form-label" for="medium-titel">Titel <span class="required">*</span></label>
-          <input id="medium-titel" type="text" class="form-input" placeholder="z.B. Harry Potter" maxlength="50">
+          <input id="medium-titel" type="text" class="form-input" placeholder="z.B. Harry Potter" maxlength="100">
           <div id="medium-titel-error" class="form-error is-hidden"></div>
         </div>
         <div class="form-group">
           <label class="form-label" for="medium-autor">Autor <span class="required">*</span></label>
-          <input id="medium-autor" type="text" class="form-input" placeholder="z.B. J.K. Rowling" maxlength="80">
+          <input id="medium-autor" type="text" class="form-input" placeholder="z.B. J.K. Rowling" maxlength="100">
           <div id="medium-autor-error" class="form-error is-hidden"></div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label class="form-label" for="medium-genre">Genre</label>
-            <input id="medium-genre" type="text" class="form-input" placeholder="z.B. Fantasy" maxlength="20">
+            <input id="medium-genre" type="text" class="form-input" placeholder="z.B. Fantasy" maxlength="40">
           </div>
           <div class="form-group">
             <label class="form-label" for="medium-standort">Standort</label>
@@ -54,11 +59,13 @@
     </div>
   </div>
 </div>
+
+<!-- Modal: Kunde -->
 <div id="kunde-modal" class="modal-overlay is-hidden">
   <div class="modal">
     <div class="modal-header">
       <h2 id="kunde-modal-titel">Kunde</h2>
-      <button id="kunde-modal-close" class="modal-close">x</button>
+      <button id="kunde-modal-close" class="modal-close">&times;</button>
     </div>
     <div class="modal-body">
       <form id="kunde-form">
@@ -81,13 +88,13 @@
         </div>
         <div class="form-group">
           <label class="form-label" for="kunde-email">E-Mail <span class="required">*</span></label>
-          <input id="kunde-email" type="email" class="form-input" placeholder="z.B. max@test.ch" maxlength="50">
+          <input id="kunde-email" type="email" class="form-input" placeholder="z.B. max@test.ch" maxlength="80">
           <div id="kunde-email-error" class="form-error is-hidden"></div>
         </div>
         <div class="form-group">
           <label class="form-label" for="kunde-adresse">Adresse <span class="required">*</span></label>
           <select id="kunde-adresse" class="form-select">
-            <option value="">-- Adresse waehlen --</option>
+            <option value="">-- Adresse wählen --</option>
           </select>
           <div id="kunde-adresse-error" class="form-error is-hidden"></div>
           <div class="form-hint">Adresse muss zuerst unter Adressen erfasst werden</div>
@@ -100,17 +107,19 @@
     </div>
   </div>
 </div>
+
+<!-- Modal: Adresse -->
 <div id="adresse-modal" class="modal-overlay is-hidden">
   <div class="modal">
     <div class="modal-header">
       <h2 id="adresse-modal-titel">Adresse</h2>
-      <button id="adresse-modal-close" class="modal-close">x</button>
+      <button id="adresse-modal-close" class="modal-close">&times;</button>
     </div>
     <div class="modal-body">
       <form id="adresse-form">
         <div class="form-group">
           <label class="form-label" for="adresse-street">Strasse <span class="required">*</span></label>
-          <input id="adresse-street" type="text" class="form-input" placeholder="z.B. Entweidstrasse 12" maxlength="40">
+          <input id="adresse-street" type="text" class="form-input" placeholder="z.B. Entweidstrasse 12" maxlength="60">
           <div id="adresse-street-error" class="form-error is-hidden"></div>
         </div>
         <div class="form-row">
@@ -121,7 +130,7 @@
           </div>
           <div class="form-group">
             <label class="form-label" for="adresse-city">Ort <span class="required">*</span></label>
-            <input id="adresse-city" type="text" class="form-input" placeholder="z.B. Basel" maxlength="20">
+            <input id="adresse-city" type="text" class="form-input" placeholder="z.B. Basel" maxlength="40">
             <div id="adresse-city-error" class="form-error is-hidden"></div>
           </div>
         </div>
@@ -133,28 +142,29 @@
     </div>
   </div>
 </div>
+
+<!-- Modal: Ausleihe -->
 <div id="ausleihe-modal" class="modal-overlay is-hidden">
   <div class="modal">
     <div class="modal-header">
       <h2>Neue Ausleihe erstellen</h2>
-      <button id="ausleihe-modal-close" class="modal-close">x</button>
+      <button id="ausleihe-modal-close" class="modal-close">&times;</button>
     </div>
     <div class="modal-body">
       <form id="ausleihe-form">
         <div class="form-group">
           <label class="form-label" for="ausleihe-kunde">Kunde <span class="required">*</span></label>
           <select id="ausleihe-kunde" class="form-select">
-            <option value="">-- Kunden waehlen --</option>
+            <option value="">-- Kunden wählen --</option>
           </select>
           <div id="ausleihe-kunde-error" class="form-error is-hidden"></div>
         </div>
         <div class="form-group">
           <label class="form-label" for="ausleihe-medium">Medium <span class="required">*</span></label>
           <select id="ausleihe-medium" class="form-select">
-            <option value="">-- Medium waehlen --</option>
+            <option value="">-- Medium wählen --</option>
           </select>
           <div id="ausleihe-medium-error" class="form-error is-hidden"></div>
-          <div class="form-hint">Nur verfuegbare Medien werden angezeigt</div>
         </div>
         <div class="form-row">
           <div class="form-group">
@@ -162,7 +172,7 @@
             <input type="text" class="form-input" value="Wird automatisch gesetzt" disabled>
           </div>
           <div class="form-group">
-            <label class="form-label">Rueckgabe</label>
+            <label class="form-label">Rückgabe</label>
             <input type="text" class="form-input" value="+14 Tage (automatisch)" disabled>
           </div>
         </div>
@@ -174,337 +184,79 @@
     </div>
   </div>
 </div>
+
+<!-- App Layout -->
 <div class="app-layout">
   <nav class="sidebar">
     <div class="sidebar-logo">
       <h2>BiblioApp</h2>
-      
     </div>
     <div class="sidebar-nav">
       <span class="nav-label">NAVIGATION</span>
-      <button class="nav-item is-active" data-section="medien">Medien <span class="nav-count">-</span></button>
-      <button class="nav-item" data-section="kunden">Kunden <span class="nav-count">-</span></button>
-      <button class="nav-item" data-section="adressen">Adressen <span class="nav-count">-</span></button>
-      <button class="nav-item" data-section="ausleihen">Ausleihen <span class="nav-count">-</span></button>
+      <button class="nav-item is-active" data-section="medien">Medien <span class="nav-count">–</span></button>
+      <button class="nav-item" data-section="kunden">Kunden <span class="nav-count">–</span></button>
+      <button class="nav-item" data-section="adressen">Adressen <span class="nav-count">–</span></button>
+      <button class="nav-item" data-section="ausleihen">Ausleihen <span class="nav-count">–</span></button>
     </div>
   </nav>
+
   <div class="main-content">
     <div class="topbar">
       <div>
         <h1 id="topbar-titel">Medien</h1>
-        <p id="topbar-untertitel"></p>
       </div>
       <button id="btn-neu" class="btn btn--primary">+ Neu</button>
     </div>
+
+    <!-- Sektion Medien -->
     <div id="sektion-medien" class="sektion">
       <div class="toolbar">
         <input id="medien-suche" type="text" class="search-input" placeholder="Titel suchen...">
       </div>
-      <div class="content">
-        <div class="table-container">
-          <table>
-            <thead><tr><th>ID</th><th>Titel</th><th>Autor</th><th>Genre</th><th>Aktionen</th></tr></thead>
-            <tbody id="medien-tbody"><tr><td colspan="5" class="loading">Lade...</td></tr></tbody>
-          </table>
-        </div>
+      <div class="table-container">
+        <table>
+          <thead><tr><th>ID</th><th>Titel</th><th>Autor</th><th>Genre</th><th>Aktionen</th></tr></thead>
+          <tbody id="medien-tbody"><tr><td colspan="5" class="loading">Lade...</td></tr></tbody>
+        </table>
       </div>
     </div>
+
+    <!-- Sektion Kunden -->
     <div id="sektion-kunden" class="sektion is-hidden">
       <div class="toolbar">
         <input id="kunden-suche" type="text" class="search-input" placeholder="Nachname suchen...">
       </div>
-      <div class="content">
-        <div class="table-container">
-          <table>
-            <thead><tr><th>ID</th><th>Name</th><th>E-Mail</th><th>Adresse</th><th>Aktionen</th></tr></thead>
-            <tbody id="kunden-tbody"><tr><td colspan="5" class="loading">Bitte Kunden waehlen</td></tr></tbody>
-          </table>
-        </div>
+      <div class="table-container">
+        <table>
+          <thead><tr><th>ID</th><th>Name</th><th>E-Mail</th><th>Adresse</th><th>Aktionen</th></tr></thead>
+          <tbody id="kunden-tbody"><tr><td colspan="5" class="loading">Lade...</td></tr></tbody>
+        </table>
       </div>
     </div>
+
+    <!-- Sektion Adressen -->
     <div id="sektion-adressen" class="sektion is-hidden">
-      <div class="toolbar"></div>
-      <div class="content">
-        <div class="table-container">
-          <table>
-            <thead><tr><th>ID</th><th>Strasse</th><th>PLZ / Ort</th><th>Aktionen</th></tr></thead>
-            <tbody id="adressen-tbody"><tr><td colspan="4" class="loading">Bitte Adressen waehlen</td></tr></tbody>
-          </table>
-        </div>
+      <div class="table-container">
+        <table>
+          <thead><tr><th>ID</th><th>Strasse</th><th>PLZ / Ort</th><th>Aktionen</th></tr></thead>
+          <tbody id="adressen-tbody"><tr><td colspan="4" class="loading">Lade...</td></tr></tbody>
+        </table>
       </div>
     </div>
+
+    <!-- Sektion Ausleihen -->
     <div id="sektion-ausleihen" class="sektion is-hidden">
-      <div class="toolbar"></div>
-      <div class="content">
-        <div class="table-container">
-          <table>
-            <thead><tr><th>ID</th><th>Medium</th><th>Kunde</th><th>Ausgeliehen am</th><th>Aktionen</th></tr></thead>
-            <tbody id="ausleihen-tbody"><tr><td colspan="5" class="loading">Bitte Ausleihen waehlen</td></tr></tbody>
-          </table>
-        </div>
+      <div class="table-container">
+        <table>
+          <thead><tr><th>ID</th><th>Medium</th><th>Kunde</th><th>Ausgeliehen am</th><th>Aktionen</th></tr></thead>
+          <tbody id="ausleihen-tbody"><tr><td colspan="5" class="loading">Lade...</td></tr></tbody>
+        </table>
       </div>
     </div>
+
   </div>
 </div>
-<script src="js/api.js"></script>
-<script src="js/validierung.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/medien.js"></script>
-<script src="js/kunden.js"></script>
-<script src="js/adressen.js"></script>
-<script src="js/ausleihen.js"></script>
-<script src="js/app.js"></script>
-</body>
-</html>
-HTMLEOFcat > BiblioApp/index.html << 'HTMLEOF'
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BiblioApp – M294 Abdullah Muhamedu Hisham</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-<div id="toast-container" class="toast-container"></div>
-<div id="confirm-modal" class="modal-overlay is-hidden">
-  <div class="confirm-box">
-    <h3 id="confirm-titel">Bestaetigen?</h3>
-    <p  id="confirm-text">Sind Sie sicher?</p>
-    <div class="confirm-actions">
-      <button id="confirm-nein" class="btn btn--secondary">Abbrechen</button>
-      <button id="confirm-ja"   class="btn btn--danger">Ja, bestaetigen</button>
-    </div>
-  </div>
-</div>
-<div id="medium-modal" class="modal-overlay is-hidden">
-  <div class="modal">
-    <div class="modal-header">
-      <h2 id="medium-modal-titel">Medium</h2>
-      <button id="medium-modal-close" class="modal-close">x</button>
-    </div>
-    <div class="modal-body">
-      <form id="medium-form">
-        <div class="form-group">
-          <label class="form-label" for="medium-titel">Titel <span class="required">*</span></label>
-          <input id="medium-titel" type="text" class="form-input" placeholder="z.B. Harry Potter" maxlength="50">
-          <div id="medium-titel-error" class="form-error is-hidden"></div>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="medium-autor">Autor <span class="required">*</span></label>
-          <input id="medium-autor" type="text" class="form-input" placeholder="z.B. J.K. Rowling" maxlength="80">
-          <div id="medium-autor-error" class="form-error is-hidden"></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" for="medium-genre">Genre</label>
-            <input id="medium-genre" type="text" class="form-input" placeholder="z.B. Fantasy" maxlength="20">
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="medium-standort">Standort</label>
-            <input id="medium-standort" type="text" class="form-input" placeholder="z.B. A-12" maxlength="20">
-          </div>
-        </div>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button id="medium-modal-cancel" class="btn btn--secondary">Abbrechen</button>
-      <button id="medium-modal-save"   class="btn btn--primary">Speichern</button>
-    </div>
-  </div>
-</div>
-<div id="kunde-modal" class="modal-overlay is-hidden">
-  <div class="modal">
-    <div class="modal-header">
-      <h2 id="kunde-modal-titel">Kunde</h2>
-      <button id="kunde-modal-close" class="modal-close">x</button>
-    </div>
-    <div class="modal-body">
-      <form id="kunde-form">
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" for="kunde-vorname">Vorname <span class="required">*</span></label>
-            <input id="kunde-vorname" type="text" class="form-input" placeholder="z.B. Max" maxlength="40">
-            <div id="kunde-vorname-error" class="form-error is-hidden"></div>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="kunde-nachname">Nachname <span class="required">*</span></label>
-            <input id="kunde-nachname" type="text" class="form-input" placeholder="z.B. Muster" maxlength="40">
-            <div id="kunde-nachname-error" class="form-error is-hidden"></div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="kunde-birthdate">Geburtsdatum <span class="required">*</span></label>
-          <input id="kunde-birthdate" type="date" class="form-input">
-          <div id="kunde-birth-error" class="form-error is-hidden"></div>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="kunde-email">E-Mail <span class="required">*</span></label>
-          <input id="kunde-email" type="email" class="form-input" placeholder="z.B. max@test.ch" maxlength="50">
-          <div id="kunde-email-error" class="form-error is-hidden"></div>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="kunde-adresse">Adresse <span class="required">*</span></label>
-          <select id="kunde-adresse" class="form-select">
-            <option value="">-- Adresse waehlen --</option>
-          </select>
-          <div id="kunde-adresse-error" class="form-error is-hidden"></div>
-          <div class="form-hint">Adresse muss zuerst unter Adressen erfasst werden</div>
-        </div>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button id="kunde-modal-cancel" class="btn btn--secondary">Abbrechen</button>
-      <button id="kunde-modal-save"   class="btn btn--primary">Speichern</button>
-    </div>
-  </div>
-</div>
-<div id="adresse-modal" class="modal-overlay is-hidden">
-  <div class="modal">
-    <div class="modal-header">
-      <h2 id="adresse-modal-titel">Adresse</h2>
-      <button id="adresse-modal-close" class="modal-close">x</button>
-    </div>
-    <div class="modal-body">
-      <form id="adresse-form">
-        <div class="form-group">
-          <label class="form-label" for="adresse-street">Strasse <span class="required">*</span></label>
-          <input id="adresse-street" type="text" class="form-input" placeholder="z.B. Entweidstrasse 12" maxlength="40">
-          <div id="adresse-street-error" class="form-error is-hidden"></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" for="adresse-zip">PLZ <span class="required">*</span></label>
-            <input id="adresse-zip" type="text" class="form-input" placeholder="z.B. 4056" maxlength="8">
-            <div id="adresse-zip-error" class="form-error is-hidden"></div>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="adresse-city">Ort <span class="required">*</span></label>
-            <input id="adresse-city" type="text" class="form-input" placeholder="z.B. Basel" maxlength="20">
-            <div id="adresse-city-error" class="form-error is-hidden"></div>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button id="adresse-modal-cancel" class="btn btn--secondary">Abbrechen</button>
-      <button id="adresse-modal-save"   class="btn btn--primary">Speichern</button>
-    </div>
-  </div>
-</div>
-<div id="ausleihe-modal" class="modal-overlay is-hidden">
-  <div class="modal">
-    <div class="modal-header">
-      <h2>Neue Ausleihe erstellen</h2>
-      <button id="ausleihe-modal-close" class="modal-close">x</button>
-    </div>
-    <div class="modal-body">
-      <form id="ausleihe-form">
-        <div class="form-group">
-          <label class="form-label" for="ausleihe-kunde">Kunde <span class="required">*</span></label>
-          <select id="ausleihe-kunde" class="form-select">
-            <option value="">-- Kunden waehlen --</option>
-          </select>
-          <div id="ausleihe-kunde-error" class="form-error is-hidden"></div>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="ausleihe-medium">Medium <span class="required">*</span></label>
-          <select id="ausleihe-medium" class="form-select">
-            <option value="">-- Medium waehlen --</option>
-          </select>
-          <div id="ausleihe-medium-error" class="form-error is-hidden"></div>
-          <div class="form-hint">Nur verfuegbare Medien werden angezeigt</div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Ausleihdatum</label>
-            <input type="text" class="form-input" value="Wird automatisch gesetzt" disabled>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Rueckgabe</label>
-            <input type="text" class="form-input" value="+14 Tage (automatisch)" disabled>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button id="ausleihe-modal-cancel" class="btn btn--secondary">Abbrechen</button>
-      <button id="ausleihe-modal-save"   class="btn btn--primary">Ausleihe erstellen</button>
-    </div>
-  </div>
-</div>
-<div class="app-layout">
-  <nav class="sidebar">
-    <div class="sidebar-logo">
-      <h2>BiblioApp</h2>
-      
-    </div>
-    <div class="sidebar-nav">
-      <span class="nav-label">NAVIGATION</span>
-      <button class="nav-item is-active" data-section="medien">Medien <span class="nav-count">-</span></button>
-      <button class="nav-item" data-section="kunden">Kunden <span class="nav-count">-</span></button>
-      <button class="nav-item" data-section="adressen">Adressen <span class="nav-count">-</span></button>
-      <button class="nav-item" data-section="ausleihen">Ausleihen <span class="nav-count">-</span></button>
-    </div>
-  </nav>
-  <div class="main-content">
-    <div class="topbar">
-      <div>
-        <h1 id="topbar-titel">Medien</h1>
-        <p id="topbar-untertitel"></p>
-      </div>
-      <button id="btn-neu" class="btn btn--primary">+ Neu</button>
-    </div>
-    <div id="sektion-medien" class="sektion">
-      <div class="toolbar">
-        <input id="medien-suche" type="text" class="search-input" placeholder="Titel suchen...">
-      </div>
-      <div class="content">
-        <div class="table-container">
-          <table>
-            <thead><tr><th>ID</th><th>Titel</th><th>Autor</th><th>Genre</th><th>Aktionen</th></tr></thead>
-            <tbody id="medien-tbody"><tr><td colspan="5" class="loading">Lade...</td></tr></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div id="sektion-kunden" class="sektion is-hidden">
-      <div class="toolbar">
-        <input id="kunden-suche" type="text" class="search-input" placeholder="Nachname suchen...">
-      </div>
-      <div class="content">
-        <div class="table-container">
-          <table>
-            <thead><tr><th>ID</th><th>Name</th><th>E-Mail</th><th>Adresse</th><th>Aktionen</th></tr></thead>
-            <tbody id="kunden-tbody"><tr><td colspan="5" class="loading">Bitte Kunden waehlen</td></tr></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div id="sektion-adressen" class="sektion is-hidden">
-      <div class="toolbar"></div>
-      <div class="content">
-        <div class="table-container">
-          <table>
-            <thead><tr><th>ID</th><th>Strasse</th><th>PLZ / Ort</th><th>Aktionen</th></tr></thead>
-            <tbody id="adressen-tbody"><tr><td colspan="4" class="loading">Bitte Adressen waehlen</td></tr></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div id="sektion-ausleihen" class="sektion is-hidden">
-      <div class="toolbar"></div>
-      <div class="content">
-        <div class="table-container">
-          <table>
-            <thead><tr><th>ID</th><th>Medium</th><th>Kunde</th><th>Ausgeliehen am</th><th>Aktionen</th></tr></thead>
-            <tbody id="ausleihen-tbody"><tr><td colspan="5" class="loading">Bitte Ausleihen waehlen</td></tr></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
 <script src="js/api.js"></script>
 <script src="js/validierung.js"></script>
 <script src="js/ui.js"></script>
