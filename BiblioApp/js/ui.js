@@ -108,6 +108,19 @@ function formatDatum(datum) {
  * @param {*} wert - Der zu prüfende Wert
  * @returns {string} Wert als String oder '-'
  */
+function escHtml(str) { return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function orDash(wert) {
-    return (wert !== null && wert !== undefined && wert !== '') ? String(wert) : '-';
+    return (wert !== null && wert !== undefined && wert !== '') ? escHtml(String(wert)) : '-';
+}
+/**
+ * Escaped einen String gegen XSS fuer sichere innerHTML-Ausgabe.
+ * @param {string} str - Der zu escapende String
+ * @returns {string} Escapeter String
+ */
+function escHtml(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
 }
