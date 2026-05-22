@@ -1,5 +1,5 @@
 /**
- * kunden.js - CRUD-Logik für die Ressource Kunde
+ * kunden.js - CRUD-Logik fuer die Ressource Kunde
  * @author  Abdullah Muhamedu Hisham
  * @date    21.05.2026
  * @version 1.0
@@ -9,7 +9,7 @@ let kundenListe = [];
 let currentKundeId = null;
 
 /**
- * Lädt alle Kunden vom Backend und zeigt sie in der Tabelle an.
+ * Laedt alle Kunden vom Backend und zeigt sie in der Tabelle an.
  * @async
  * @returns {Promise<void>}
  */
@@ -20,6 +20,7 @@ async function renderKunden() {
         kundenListe = await getKunden();
         renderKundenTabelle(kundenListe);
         updateNavCount('kunden', kundenListe.length);
+        updateStat('stat-kunden', kundenListe.length);
     } catch (err) {
         tbody.innerHTML = '<tr><td colspan="5" class="loading">Fehler beim Laden.</td></tr>';
         showToast('Kunden konnten nicht geladen werden', 'error');
@@ -27,7 +28,7 @@ async function renderKunden() {
 }
 
 /**
- * Rendert die Kunden-Tabelle mit den übergebenen Daten.
+ * Rendert die Kunden-Tabelle mit den uebergebenen Daten.
  * @param {Array} liste - Liste der Kunden-Objekte
  * @returns {void}
  */
@@ -48,19 +49,19 @@ function renderKundenTabelle(liste) {
             + '<td>' + adresse + '</td>'
             + '<td>'
             + '<button class="btn btn--sm btn--secondary" data-action="edit-kunde" data-id="' + k.id + '">Bearbeiten</button> '
-            + '<button class="btn btn--sm btn--danger" data-action="delete-kunde" data-id="' + k.id + '" data-name="' + sanitize((k.firstName || '') + ' ' + (k.lastName || '')) + '">Löschen</button>'
+            + '<button class="btn btn--sm btn--danger" data-action="delete-kunde" data-id="' + k.id + '" data-name="' + sanitize((k.firstName || '') + ' ' + (k.lastName || '')) + '">Loeschen</button>'
             + '</td></tr>';
     }).join('');
 }
 
 /**
- * Befüllt das Adressen-Dropdown im Kunden-Formular.
+ * Befuellt das Adressen-Dropdown im Kunden-Formular.
  * @async
  * @returns {Promise<void>}
  */
 async function fillAdressenDropdown() {
     const select = document.getElementById('kunde-adresse');
-    select.innerHTML = '<option value="">-- Adresse wählen --</option>';
+    select.innerHTML = '<option value="">-- Adresse waehlen --</option>';
     try {
         const adressen = await getAdressen();
         adressen.forEach(function(a) {
@@ -73,7 +74,42 @@ async function fillAdressenDropdown() {
 }
 
 /**
- * Öffnet das Modal zum Erstellen eines neuen Kunden.
+ * Konvertiert Datum von TT.MM.JJJJ zu JJJJ-MM-TT fuer das Backend.
+ * @param {string} datum - Datum im Format TT.MM.JJJJ
+ * @returns {string} Datum im Format JJJJ-MM-TT oder leerer String bei Fehler
+ */
+function datumZuIso(datum) {
+    const teile = datum.trim().split('.');
+    if (teile.length !== 3) return '';
+    return teile[2] + '-' + teile[1] + '-' + teile[0];
+}
+
+/**
+ * Konvertiert Datum von JJJJ-MM-TT zu TT.MM.JJJJ fuer die Anzeige.
+ * @param {string} datum - Datum im Format JJJJ-MM-TT
+ * @returns {string} Datum im Format TT.MM.JJJJ
+ */
+function datumZuAnzeige(datum) {
+    if (!datum) return '';
+    const teile = datum.split('-');
+    if (teile.length !== 3) return datum;
+    return teile[2] + '.' + teile[1] + '.' + teile[0];
+}
+
+/**
+ * Prueft ob ein Datum im Format TT.MM.JJJJ gueltig ist.
+ * @param {string} datum - Das zu pruefende Datum
+ * @returns {boolean} true wenn gueltig
+ */
+function validateDatumAnzeige(datum) {
+    if (!/^\d{2}\.\d{2}\.\d{4}$/.test(datum.trim())) return false;
+    const iso = datumZuIso(datum);
+    const d = new Date(iso);
+    return d instanceof Date && !isNaN(d) && d < new Date();
+}
+
+/**
+ * Oeffnet das Modal zum Erstellen eines neuen Kunden.
  * @async
  * @returns {Promise<void>}
  */
@@ -88,7 +124,7 @@ async function openCreateKundeModal() {
 }
 
 /**
- * Öffnet das Modal zum Bearbeiten eines bestehenden Kunden.
+ * Oeffnet das Modal zum Bearbeiten eines bestehenden Kunden.
  * @async
  * @param {number} id - ID des zu bearbeitenden Kunden
  * @returns {Promise<void>}
@@ -100,7 +136,7 @@ async function openEditKundeModal(id) {
     document.getElementById('kunde-modal-titel').textContent = 'Kunden bearbeiten';
     document.getElementById('kunde-vorname').value   = kunde.firstName || '';
     document.getElementById('kunde-nachname').value  = kunde.lastName  || '';
-    document.getElementById('kunde-birthdate').value = kunde.birthDate || '';
+    document.getElementById('kunde-birthdate').value = datumZuAnzeige(kunde.birthDate);
     document.getElementById('kunde-email').value     = kunde.email     || '';
     enableKundeFelder(false);
     clearKundeErrors();
@@ -110,7 +146,7 @@ async function openEditKundeModal(id) {
 }
 
 /**
- * Aktiviert oder deaktiviert die nicht änderbaren Felder im Kunden-Formular.
+ * Aktiviert oder deaktiviert die nicht aenderbaren Felder.
  * @param {boolean} aktiv - true = alle Felder aktiv
  * @returns {void}
  */
@@ -130,7 +166,7 @@ function clearKundeErrors() {
 }
 
 /**
- * Schliesst das Kunden-Modal und stellt alle Felder wieder her.
+ * Schliesst das Kunden-Modal.
  * @returns {void}
  */
 function closeKundeModal() {
@@ -151,16 +187,18 @@ async function saveKunde() {
     const adresseSelect  = document.getElementById('kunde-adresse');
 
     const felder = currentKundeId ? [
-        { input: emailInput,    errorEl: document.getElementById('kunde-email-error'),   regel: validateEmail,     meldung: 'Bitte gültige E-Mail eingeben' },
-        { input: adresseSelect, errorEl: document.getElementById('kunde-adresse-error'), regel: validateNichtLeer, meldung: 'Bitte eine Adresse wählen' }
+        { input: emailInput,    errorEl: document.getElementById('kunde-email-error'),   regel: validateEmail,            meldung: 'Bitte gueltige E-Mail eingeben' },
+        { input: adresseSelect, errorEl: document.getElementById('kunde-adresse-error'), regel: validateNichtLeer,        meldung: 'Bitte eine Adresse waehlen' }
     ] : [
-        { input: vornameInput,   errorEl: document.getElementById('kunde-vorname-error'),  regel: validateName,      meldung: 'Nur Buchstaben erlaubt' },
-        { input: nachnameInput,  errorEl: document.getElementById('kunde-nachname-error'), regel: validateName,      meldung: 'Nur Buchstaben erlaubt' },
-        { input: birthdateInput, errorEl: document.getElementById('kunde-birth-error'),    regel: validateDatum,     meldung: 'Bitte gültiges Datum (YYYY-MM-DD)' },
-        { input: emailInput,     errorEl: document.getElementById('kunde-email-error'),    regel: validateEmail,     meldung: 'Bitte gültige E-Mail eingeben' },
-        { input: adresseSelect,  errorEl: document.getElementById('kunde-adresse-error'),  regel: validateNichtLeer, meldung: 'Bitte eine Adresse wählen' }
+        { input: vornameInput,   errorEl: document.getElementById('kunde-vorname-error'),  regel: validateName,            meldung: 'Nur Buchstaben erlaubt' },
+        { input: nachnameInput,  errorEl: document.getElementById('kunde-nachname-error'), regel: validateName,            meldung: 'Nur Buchstaben erlaubt' },
+        { input: birthdateInput, errorEl: document.getElementById('kunde-birth-error'),    regel: validateDatumAnzeige,   meldung: 'Format: TT.MM.JJJJ (z.B. 27.02.1860)' },
+        { input: emailInput,     errorEl: document.getElementById('kunde-email-error'),    regel: validateEmail,           meldung: 'Bitte gueltige E-Mail eingeben' },
+        { input: adresseSelect,  errorEl: document.getElementById('kunde-adresse-error'),  regel: validateNichtLeer,       meldung: 'Bitte eine Adresse waehlen' }
     ];
     if (!validateFormular(felder)) return;
+
+    const isoDatum = datumZuIso(birthdateInput.value);
 
     try {
         if (currentKundeId) {
@@ -169,7 +207,7 @@ async function saveKunde() {
         } else {
             await createKunde(
                 sanitize(vornameInput.value), sanitize(nachnameInput.value),
-                birthdateInput.value, sanitize(emailInput.value),
+                isoDatum, sanitize(emailInput.value),
                 parseInt(adresseSelect.value)
             );
             showToast('Kunde erstellt', 'success');
@@ -180,17 +218,17 @@ async function saveKunde() {
 }
 
 /**
- * Zeigt Bestätigungsdialog und löscht einen Kunden nach Bestätigung.
- * @param {number} id   - ID des zu löschenden Kunden
- * @param {string} name - Name des Kunden für die Bestätigung
+ * Zeigt Bestaetigungsdialog und loescht einen Kunden nach Bestaetigung.
+ * @param {number} id   - ID des zu loeschenden Kunden
+ * @param {string} name - Name des Kunden fuer die Bestaetigung
  * @returns {void}
  */
 function confirmDeleteKunde(id, name) {
-    showConfirm('Kunden löschen', 'Soll "' + name + '" wirklich gelöscht werden?', async function() {
+    showConfirm('Kunden loeschen', 'Soll "' + name + '" wirklich geloescht werden?', async function() {
         try {
             await deleteKunde(id);
-            showToast('Kunde gelöscht', 'success');
+            showToast('Kunde geloescht', 'success');
             await renderKunden();
-        } catch (err) { showToast('Löschen fehlgeschlagen: ' + err.message, 'error'); }
+        } catch (err) { showToast('Loeschen fehlgeschlagen: ' + err.message, 'error'); }
     });
 }

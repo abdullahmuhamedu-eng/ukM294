@@ -6,7 +6,29 @@
  */
 
 /**
- * Zeigt eine Toast-Benachrichtigung für 3.5 Sekunden an.
+ * Escaped einen String gegen XSS fuer sichere innerHTML-Ausgabe.
+ * @param {string} str - Der zu escapende String
+ * @returns {string} Escapeter String
+ */
+function escHtml(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
+
+/**
+ * Gibt den Wert escaped zurueck oder '-' wenn leer oder null.
+ * @param {*} wert - Der zu pruefende Wert
+ * @returns {string} Escapeter Wert oder '-'
+ */
+function orDash(wert) {
+    return (wert !== null && wert !== undefined && wert !== '') ? escHtml(String(wert)) : '-';
+}
+
+/**
+ * Zeigt eine Toast-Benachrichtigung fuer 3.5 Sekunden an.
  * @param {string} meldung - Anzuzeigende Nachricht
  * @param {string} typ     - Toast-Typ: success, error, warning
  * @returns {void}
@@ -21,7 +43,7 @@ function showToast(meldung, typ) {
 }
 
 /**
- * Öffnet ein Modal anhand seiner ID.
+ * Oeffnet ein Modal anhand seiner ID.
  * @param {string} modalId - ID des Modals
  * @returns {void}
  */
@@ -43,16 +65,14 @@ function hideModal(modalId) {
  * @returns {void}
  */
 function hideAllModals() {
-    document.querySelectorAll('.modal-overlay').forEach(function(m) {
-        m.classList.add('is-hidden');
-    });
+    document.querySelectorAll('.modal-overlay').forEach(function(m) { m.classList.add('is-hidden'); });
 }
 
 /**
- * Zeigt einen Bestätigungsdialog an.
+ * Zeigt einen Bestaetigungsdialog an.
  * @param {string}   titel     - Titel des Dialogs
  * @param {string}   text      - Beschreibungstext
- * @param {Function} onConfirm - Funktion die bei Bestätigung aufgerufen wird
+ * @param {Function} onConfirm - Funktion die bei Bestaetigung aufgerufen wird
  * @returns {void}
  */
 function showConfirm(titel, text, onConfirm) {
@@ -82,9 +102,9 @@ function navigateTo(sektionId) {
 }
 
 /**
- * Aktualisiert den Zähler eines Navigations-Eintrags.
+ * Aktualisiert den Zaehler eines Navigations-Eintrags.
  * @param {string} sektionId - ID der Sektion
- * @param {number} anzahl    - Anzahl der Einträge
+ * @param {number} anzahl    - Anzahl der Eintraege
  * @returns {void}
  */
 function updateNavCount(sektionId, anzahl) {
@@ -93,34 +113,26 @@ function updateNavCount(sektionId, anzahl) {
 }
 
 /**
- * Formatiert ein ISO-Datum (YYYY-MM-DD) in deutsches Format (DD.MM.YYYY).
+ * Aktualisiert den Wert einer Stats-Karte.
+ * @param {string} statId  - ID des Stat-Elements
+ * @param {number} anzahl  - Anzuzeigende Zahl
+ * @returns {void}
+ */
+function updateStat(statId, anzahl) {
+    const el = document.getElementById(statId);
+    if (el) el.textContent = anzahl;
+}
+
+/**
+ * Formatiert ein ISO-Datum (JJJJ-MM-TT) in deutsches Format (TT.MM.JJJJ).
  * @param {string} datum - ISO-Datum
  * @returns {string} Formatiertes Datum oder '-' wenn leer
  */
 function formatDatum(datum) {
     if (!datum) return '-';
     const t = datum.split('-');
+    if (t.length !== 3) return datum;
     return t[2] + '.' + t[1] + '.' + t[0];
 }
 
-/**
- * Gibt den Wert zurück oder '-' wenn leer oder null.
- * @param {*} wert - Der zu prüfende Wert
- * @returns {string} Wert als String oder '-'
- */
-function escHtml(str) { return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function orDash(wert) {
-    return (wert !== null && wert !== undefined && wert !== '') ? escHtml(String(wert)) : '-';
-}
-/**
- * Escaped einen String gegen XSS fuer sichere innerHTML-Ausgabe.
- * @param {string} str - Der zu escapende String
- * @returns {string} Escapeter String
- */
-function escHtml(str) {
-    return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
-}
+

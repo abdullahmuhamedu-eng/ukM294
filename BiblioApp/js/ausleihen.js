@@ -19,6 +19,7 @@ async function renderAusleihen() {
         ausleihenListe = await getAusleihen();
         renderAusleihenTabelle(ausleihenListe);
         updateNavCount('ausleihen', ausleihenListe.length);
+        updateStat('stat-ausleihen', ausleihenListe.length);
     } catch (err) {
         tbody.innerHTML = '<tr><td colspan="5" class="loading">Fehler beim Laden.</td></tr>';
         showToast('Ausleihen konnten nicht geladen werden', 'error');

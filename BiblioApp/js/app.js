@@ -13,9 +13,9 @@ const SEKTIONEN = {
 };
 
 /**
- * Wechselt zur angegebenen Sektion und lädt die Daten.
+ * Wechselt zur angegebenen Sektion und laedt die Daten.
  * @async
- * @param {string} sektionId - ID der Sektion (medien, kunden, adressen, ausleihen)
+ * @param {string} sektionId - ID der Sektion
  * @returns {Promise<void>}
  */
 async function switchSektion(sektionId) {
@@ -28,7 +28,7 @@ async function switchSektion(sektionId) {
 }
 
 /**
- * Öffnet das passende Erstellen-Modal für die aktive Sektion.
+ * Oeffnet das passende Erstellen-Modal fuer die aktive Sektion.
  * @async
  * @returns {Promise<void>}
  */
@@ -50,6 +50,12 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     document.getElementById('btn-neu').addEventListener('click', openNeuModal);
 
+    // Suche
+    document.getElementById('medien-suche').addEventListener('input', searchMedien);
+    document.getElementById('medien-suche-btn').addEventListener('click', searchMedien);
+    document.getElementById('kunden-suche').addEventListener('input', searchKunden);
+    document.getElementById('kunden-suche-btn').addEventListener('click', searchKunden);
+
     // Modal Medium
     document.getElementById('medium-modal-close').addEventListener('click',  function() { hideModal('medium-modal'); });
     document.getElementById('medium-modal-cancel').addEventListener('click', function() { hideModal('medium-modal'); });
@@ -69,9 +75,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     document.getElementById('ausleihe-modal-close').addEventListener('click',  function() { hideModal('ausleihe-modal'); });
     document.getElementById('ausleihe-modal-cancel').addEventListener('click', function() { hideModal('ausleihe-modal'); });
     document.getElementById('ausleihe-modal-save').addEventListener('click',   saveAusleihe);
-
-    // Suche Medien
-    document.getElementById('medien-suche').addEventListener('input', searchMedien);
 
     // Event-Delegation Medien
     document.getElementById('medien-tbody').addEventListener('click', function(e) {
@@ -128,6 +131,12 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (e.key === 'Escape') hideAllModals();
     });
 
+    // Startseite laden + alle Stats laden
     await renderMedien();
+    await renderKunden();
+    await renderAusleihen();
+    navigateTo('medien');
+    document.getElementById('topbar-titel').textContent = 'Medien';
+    document.querySelector('[data-section="medien"]').classList.add('is-active');
 });
 
