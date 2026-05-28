@@ -105,7 +105,7 @@ function openEditMediumModal(id) {
  * @returns {void}
  */
 function clearMediumErrors() {
-    document.querySelectorAll('#medium-modal .form-error').forEach(function(e) { e.classList.add('is-hidden'); });
+    document.querySelectorAll('#medium-modal .form-error').forEach(function(e) { e.classList.add('is-hidden'); e.textContent = ''; });
     document.querySelectorAll('#medium-modal .form-input').forEach(function(i) { i.classList.remove('is-invalid'); });
 }
 
@@ -123,8 +123,10 @@ async function saveMedium() {
     const ratingInput   = document.getElementById('medium-rating');
 
     const gueltig = validateFormular([
-        { input: titelInput, errorEl: document.getElementById('medium-titel-error'), regel: validateTitel, meldung: 'Titel darf nicht leer sein.' },
-        { input: autorInput, errorEl: document.getElementById('medium-autor-error'), regel: function(w) { return w.trim() === '' || validateName(w); }, meldung: 'Autor darf nur Buchstaben enthalten.' }
+        { input: titelInput,  errorEl: document.getElementById('medium-titel-error'),  regel: validateTitel,    meldung: 'Titel muss mindestens einen Buchstaben enthalten.' },
+        { input: autorInput,  errorEl: document.getElementById('medium-autor-error'),  regel: function(w) { return w.trim() === '' || validateName(w); }, meldung: 'Autor darf nur Buchstaben enthalten (mind. ein Buchstabe).' },
+        { input: eanInput,    errorEl: document.getElementById('medium-ean-error'),    regel: validateGanzzahl, meldung: 'EAN darf nur Ziffern enthalten.' },
+        { input: ratingInput, errorEl: document.getElementById('medium-rating-error'), regel: validateGanzzahl, meldung: 'Rating darf nur Ziffern enthalten.' }
     ]);
     if (!gueltig) return;
 
