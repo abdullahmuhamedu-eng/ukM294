@@ -46,7 +46,7 @@ function renderAusleihenTabelle(liste) {
             + '<td><strong>' + medium + '</strong></td>'
             + '<td>' + kunde + '</td>'
             + '<td>' + formatDatum(a.dateBorrowed) + '</td>'
-            + '<td>' + formatDatum(a.dateReturn) + '</td>'
+            + '<td>' + formatDatum(a.dueDate) + '</td>'
             + '<td>'
             + '<button class="btn btn--sm btn--secondary" data-action="extend-ausleihe" data-id="' + a.id + '">+14 Tage</button> '
             + '<button class="btn btn--sm btn--secondary" data-action="return-medium" data-medium-id="' + mediumId + '">Rückgabe</button> '
