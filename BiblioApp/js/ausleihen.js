@@ -14,14 +14,14 @@ let ausleihenListe = [];
  */
 async function renderAusleihen() {
     const tbody = document.getElementById('ausleihen-tbody');
-    tbody.innerHTML = '<tr><td colspan="5" class="loading">Lade...</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="6" class="loading">Lade...</td></tr>';
     try {
         ausleihenListe = await getAusleihen();
         renderAusleihenTabelle(ausleihenListe);
         updateNavCount('ausleihen', ausleihenListe.length);
         updateStat('stat-ausleihen', ausleihenListe.length);
     } catch (err) {
-        tbody.innerHTML = '<tr><td colspan="5" class="loading">Fehler beim Laden.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="6" class="loading">Fehler beim Laden.</td></tr>';
         showToast('Ausleihen konnten nicht geladen werden', 'error');
     }
 }
@@ -34,7 +34,7 @@ async function renderAusleihen() {
 function renderAusleihenTabelle(liste) {
     const tbody = document.getElementById('ausleihen-tbody');
     if (!liste || liste.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" class="loading">Keine Ausleihen vorhanden</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="6" class="loading">Keine Ausleihen vorhanden</td></tr>';
         return;
     }
     tbody.innerHTML = liste.map(function(a) {

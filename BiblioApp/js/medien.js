@@ -123,8 +123,8 @@ async function saveMedium() {
     const ratingInput   = document.getElementById('medium-rating');
 
     const gueltig = validateFormular([
-        { input: titelInput, errorEl: document.getElementById('medium-titel-error'), regel: validateName, meldung: 'Titel darf nur Buchstaben enthalten.' },
-        { input: autorInput, errorEl: document.getElementById('medium-autor-error'), regel: validateName, meldung: 'Autor darf nur Buchstaben enthalten.' }
+        { input: titelInput, errorEl: document.getElementById('medium-titel-error'), regel: validateTitel, meldung: 'Titel darf nicht leer sein.' },
+        { input: autorInput, errorEl: document.getElementById('medium-autor-error'), regel: validateName,  meldung: 'Autor darf nur Buchstaben enthalten.' }
     ]);
     if (!gueltig) return;
 
@@ -139,7 +139,7 @@ async function saveMedium() {
             await updateMedium(currentMediumId, body);
             showToast('Medium aktualisiert', 'success');
         } else {
-            await createMedium(body.title, body.author, body.genre, body.locationcode);
+            await sendRequest('/media', 'POST', body);
             showToast('Medium erstellt', 'success');
         }
         hideModal('medium-modal');

@@ -25,6 +25,11 @@ function validateName(wert) {
     return /^[A-Za-zÀ-ÿäöüÄÖÜ\s\-\.,']+$/.test(wert.trim());
 }
 
+function validateTitel(wert) {
+    if (typeof wert !== 'string' || wert.trim().length === 0) return false;
+    return /^[A-Za-z0-9À-ÿäöüÄÖÜ\s\-\.,']+$/.test(wert.trim());
+}
+
 /**
  * Prüft ob eine E-Mail-Adresse gültig ist (RegEx).
  * @param {string} email - Die zu prüfende E-Mail-Adresse
