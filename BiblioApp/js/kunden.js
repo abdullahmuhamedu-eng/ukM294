@@ -227,7 +227,7 @@ function confirmDeleteKunde(id, name) {
     showConfirm('Kunden löschen', 'Soll "' + name + '" wirklich gelöscht werden?', async function() {
         try {
             await deleteKunde(id);
-            showToast('Kunde gelöscht', 'success');
+            showToast('Kunde gelöscht', 'error');
             await renderKunden();
         } catch (err) { showToast('Löschen fehlgeschlagen: ' + err.message, 'error'); }
     });
@@ -238,11 +238,14 @@ function confirmDeleteKunde(id, name) {
  * @async
  * @returns {Promise<void>}
  */
-async function searchKunden() {
-    const suchbegriff = document.getElementById('kunden-suche').value.trim();
+function searchKunden() {
+    const suchbegriff = document.getElementById('kunden-suche').value.trim().toLowerCase();
     if (suchbegriff.length === 0) { renderKundenTabelle(kundenListe); return; }
-    try {
-        const ergebnis = await sendRequest('/customers/search/lastname/' + encodeURIComponent(suchbegriff));
-        renderKundenTabelle(ergebnis);
-    } catch (err) { showToast('Suche fehlgeschlagen', 'error'); }
+    const ergebnis = kundenListe.filter(function(k) {
+        const vorname  = (k.firstName || '').toLowerCase();
+        const nachname = (k.lastName  || '').toLowerCase();
+        return vorname.includes(suchbegriff) || nachname.includes(suchbegriff)
+            || (vorname + ' ' + nachname).includes(suchbegriff);
+    });
+    renderKundenTabelle(ergebnis);
 }

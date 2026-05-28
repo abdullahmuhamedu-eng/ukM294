@@ -160,8 +160,13 @@ function confirmDeleteMedium(id, name) {
     showConfirm('Medium löschen', 'Soll "' + name + '" wirklich gelöscht werden?', async function() {
         try {
             await deleteMedium(id);
-            showToast('Medium gelöscht', 'success');
+            showToast('Medium gelöscht', 'error');
             await renderMedien();
-        } catch (err) { showToast('Löschen fehlgeschlagen: ' + err.message, 'error'); }
+        } catch (err) {
+            const msg = err.message && err.message.includes('500')
+                ? 'Medium kann nicht gelöscht werden — es ist noch ausgeliehen.'
+                : 'Löschen fehlgeschlagen.';
+            showToast(msg, 'error');
+        }
     });
 }

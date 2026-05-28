@@ -127,7 +127,7 @@ function confirmDeleteAdresse(id, name) {
     showConfirm('Adresse löschen', 'Soll "' + name + '" gelöscht werden?', async function() {
         try {
             await deleteAdresse(id);
-            showToast('Adresse gelöscht', 'success');
+            showToast('Adresse gelöscht', 'error');
             await renderAdressen();
         } catch (err) { showToast('Löschen fehlgeschlagen: ' + err.message, 'error'); }
     });

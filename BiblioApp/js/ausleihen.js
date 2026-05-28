@@ -138,7 +138,7 @@ function confirmExtendAusleihe(id) {
  * @returns {void}
  */
 function confirmReturnMedium(mediumId) {
-    showConfirm('Medium zurückgeben', 'Soll das Medium zurückgegeben werden?', async function() {
+    showConfirm('Rückgabe bestätigen', 'Wurde das Medium korrekt zurückgegeben?', async function() {
         try {
             await returnMedium(mediumId);
             showToast('Medium zurückgegeben', 'success');
@@ -157,7 +157,7 @@ function confirmDeleteAusleihe(id) {
     showConfirm('Ausleihe löschen', 'Soll diese Ausleihe gelöscht werden?', async function() {
         try {
             await deleteAusleihe(id);
-            showToast('Ausleihe gelöscht', 'success');
+            showToast('Ausleihe gelöscht', 'error');
             await renderAusleihen();
             await renderMedien();
         } catch (err) { showToast('Löschen fehlgeschlagen: ' + err.message, 'error'); }
