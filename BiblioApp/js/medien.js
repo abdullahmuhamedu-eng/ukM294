@@ -94,8 +94,8 @@ function openEditMediumModal(id) {
     document.getElementById('medium-autor').value    = medium.author       || '';
     document.getElementById('medium-genre').value    = medium.genre        || '';
     document.getElementById('medium-standort').value = medium.locationcode || '';
-    document.getElementById('medium-ean').value      = medium.ean          || '';
-    document.getElementById('medium-rating').value   = medium.rating       || '';
+    document.getElementById('medium-ean').value      = medium.ean    != null ? medium.ean    : '';
+    document.getElementById('medium-rating').value   = medium.rating != null ? medium.rating : '';
     clearMediumErrors();
     showModal('medium-modal');
 }
@@ -128,11 +128,14 @@ async function saveMedium() {
     ]);
     if (!gueltig) return;
 
-    const body = { title: sanitize(titelInput.value), author: sanitize(autorInput.value) };
-    if (genreInput.value.trim())    body.genre        = sanitize(genreInput.value);
-    if (standortInput.value.trim()) body.locationcode = sanitize(standortInput.value);
-    if (eanInput.value.trim())      body.ean          = Number(eanInput.value);
-    if (ratingInput.value.trim())   body.rating       = Number(ratingInput.value);
+    const body = {
+        title:        sanitize(titelInput.value),
+        author:       sanitize(autorInput.value),
+        genre:        genreInput.value.trim()    ? sanitize(genreInput.value)    : null,
+        locationcode: standortInput.value.trim() ? sanitize(standortInput.value) : null,
+        ean:          eanInput.value.trim()      ? Number(eanInput.value)        : null,
+        rating:       ratingInput.value.trim()   ? Number(ratingInput.value)     : null
+    };
 
     try {
         if (currentMediumId) {
