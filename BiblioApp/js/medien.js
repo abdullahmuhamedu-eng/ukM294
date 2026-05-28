@@ -49,7 +49,7 @@ function renderMedienTabelle(liste) {
             + '<td>' + orDash(m.rating) + '</td>'
             + '<td>'
             + '<button class="btn btn--sm btn--secondary" data-action="edit-medium" data-id="' + m.id + '">Bearbeiten</button> '
-            + '<button class="btn btn--sm btn--danger" data-action="delete-medium" data-id="' + m.id + '" data-name="' + sanitize(m.title || '') + '">Loeschen</button>'
+            + '<button class="btn btn--sm btn--danger" data-action="delete-medium" data-id="' + m.id + '" data-name="' + sanitize(m.title || '') + '">Löschen</button>'
             + '</td></tr>';
     }).join('');
 }
@@ -154,11 +154,11 @@ async function saveMedium() {
  * @returns {void}
  */
 function confirmDeleteMedium(id, name) {
-    showConfirm('Medium loeschen', 'Soll "' + name + '" wirklich geloescht werden?', async function() {
+    showConfirm('Medium löschen', 'Soll "' + name + '" wirklich gelöscht werden?', async function() {
         try {
             await deleteMedium(id);
-            showToast('Medium geloescht', 'success');
+            showToast('Medium gelöscht', 'success');
             await renderMedien();
-        } catch (err) { showToast('Loeschen fehlgeschlagen: ' + err.message, 'error'); }
+        } catch (err) { showToast('Löschen fehlgeschlagen: ' + err.message, 'error'); }
     });
 }

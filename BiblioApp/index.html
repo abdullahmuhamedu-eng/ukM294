@@ -12,11 +12,11 @@
 <!-- Bestaetigungsdialog -->
 <div id="confirm-modal" class="modal-overlay is-hidden">
   <div class="confirm-box">
-    <h3 id="confirm-titel">Bestaetigen?</h3>
+    <h3 id="confirm-titel">Bestätigen?</h3>
     <p id="confirm-text">Sind Sie sicher?</p>
     <div class="confirm-actions">
       <button id="confirm-nein" class="btn btn--secondary">Abbrechen</button>
-      <button id="confirm-ja" class="btn btn--danger">Ja, bestaetigen</button>
+      <button id="confirm-ja" class="btn btn--danger">Ja, bestätigen</button>
     </div>
   </div>
 </div>
@@ -103,7 +103,7 @@
         <div class="form-group">
           <label class="form-label" for="kunde-adresse">Adresse <span class="required">*</span></label>
           <select id="kunde-adresse" class="form-select">
-            <option value="">-- Adresse waehlen --</option>
+            <option value="">-- Adresse wählen --</option>
           </select>
           <div id="kunde-adresse-error" class="form-error is-hidden"></div>
           <div class="form-hint">Adresse muss zuerst unter Adressen erfasst werden</div>
@@ -164,14 +164,14 @@
         <div class="form-group">
           <label class="form-label" for="ausleihe-kunde">Kunde <span class="required">*</span></label>
           <select id="ausleihe-kunde" class="form-select">
-            <option value="">-- Kunden waehlen --</option>
+            <option value="">-- Kunden wählen --</option>
           </select>
           <div id="ausleihe-kunde-error" class="form-error is-hidden"></div>
         </div>
         <div class="form-group">
           <label class="form-label" for="ausleihe-medium">Medium <span class="required">*</span></label>
           <select id="ausleihe-medium" class="form-select">
-            <option value="">-- Medium waehlen --</option>
+            <option value="">-- Medium wählen --</option>
           </select>
           <div id="ausleihe-medium-error" class="form-error is-hidden"></div>
         </div>
@@ -181,7 +181,7 @@
             <input type="text" class="form-input" value="Wird automatisch gesetzt" disabled>
           </div>
           <div class="form-group">
-            <label class="form-label">Rueckgabe</label>
+            <label class="form-label">Rückgabe</label>
             <input type="text" class="form-input" value="+14 Tage (automatisch)" disabled>
           </div>
         </div>
@@ -278,7 +278,7 @@
     <div id="sektion-ausleihen" class="sektion is-hidden">
       <div class="table-container">
         <table>
-          <thead><tr><th>ID</th><th>Medium</th><th>Kunde</th><th>Ausgeliehen am</th><th>Rueckgabe bis</th><th>Aktionen</th></tr></thead>
+          <thead><tr><th>ID</th><th>Medium</th><th>Kunde</th><th>Ausgeliehen am</th><th>Rückgabe bis</th><th>Aktionen</th></tr></thead>
           <tbody id="ausleihen-tbody"><tr><td colspan="6" class="loading">Lade...</td></tr></tbody>
         </table>
       </div>

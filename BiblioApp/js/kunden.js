@@ -49,7 +49,7 @@ function renderKundenTabelle(liste) {
             + '<td>' + adresse + '</td>'
             + '<td>'
             + '<button class="btn btn--sm btn--secondary" data-action="edit-kunde" data-id="' + k.id + '">Bearbeiten</button> '
-            + '<button class="btn btn--sm btn--danger" data-action="delete-kunde" data-id="' + k.id + '" data-name="' + sanitize((k.firstName || '') + ' ' + (k.lastName || '')) + '">Loeschen</button>'
+            + '<button class="btn btn--sm btn--danger" data-action="delete-kunde" data-id="' + k.id + '" data-name="' + sanitize((k.firstName || '') + ' ' + (k.lastName || '')) + '">Löschen</button>'
             + '</td></tr>';
     }).join('');
 }
@@ -61,7 +61,7 @@ function renderKundenTabelle(liste) {
  */
 async function fillAdressenDropdown() {
     const select = document.getElementById('kunde-adresse');
-    select.innerHTML = '<option value="">-- Adresse waehlen --</option>';
+    select.innerHTML = '<option value="">-- Adresse wählen --</option>';
     try {
         const adressen = await getAdressen();
         adressen.forEach(function(a) {
@@ -187,14 +187,14 @@ async function saveKunde() {
     const adresseSelect  = document.getElementById('kunde-adresse');
 
     const felder = currentKundeId ? [
-        { input: emailInput,    errorEl: document.getElementById('kunde-email-error'),   regel: validateEmail,            meldung: 'Bitte gueltige E-Mail eingeben' },
-        { input: adresseSelect, errorEl: document.getElementById('kunde-adresse-error'), regel: validateNichtLeer,        meldung: 'Bitte eine Adresse waehlen' }
+        { input: emailInput,    errorEl: document.getElementById('kunde-email-error'),   regel: validateEmail,            meldung: 'Bitte gültige E-Mail eingeben' },
+        { input: adresseSelect, errorEl: document.getElementById('kunde-adresse-error'), regel: validateNichtLeer,        meldung: 'Bitte eine Adresse wählen' }
     ] : [
         { input: vornameInput,   errorEl: document.getElementById('kunde-vorname-error'),  regel: validateName,            meldung: 'Nur Buchstaben erlaubt' },
         { input: nachnameInput,  errorEl: document.getElementById('kunde-nachname-error'), regel: validateName,            meldung: 'Nur Buchstaben erlaubt' },
         { input: birthdateInput, errorEl: document.getElementById('kunde-birth-error'),    regel: validateDatumAnzeige,   meldung: 'Format: TT.MM.JJJJ (z.B. 27.02.1860)' },
-        { input: emailInput,     errorEl: document.getElementById('kunde-email-error'),    regel: validateEmail,           meldung: 'Bitte gueltige E-Mail eingeben' },
-        { input: adresseSelect,  errorEl: document.getElementById('kunde-adresse-error'),  regel: validateNichtLeer,       meldung: 'Bitte eine Adresse waehlen' }
+        { input: emailInput,     errorEl: document.getElementById('kunde-email-error'),    regel: validateEmail,           meldung: 'Bitte gültige E-Mail eingeben' },
+        { input: adresseSelect,  errorEl: document.getElementById('kunde-adresse-error'),  regel: validateNichtLeer,       meldung: 'Bitte eine Adresse wählen' }
     ];
     if (!validateFormular(felder)) return;
 
@@ -224,12 +224,12 @@ async function saveKunde() {
  * @returns {void}
  */
 function confirmDeleteKunde(id, name) {
-    showConfirm('Kunden loeschen', 'Soll "' + name + '" wirklich geloescht werden?', async function() {
+    showConfirm('Kunden löschen', 'Soll "' + name + '" wirklich gelöscht werden?', async function() {
         try {
             await deleteKunde(id);
-            showToast('Kunde geloescht', 'success');
+            showToast('Kunde gelöscht', 'success');
             await renderKunden();
-        } catch (err) { showToast('Loeschen fehlgeschlagen: ' + err.message, 'error'); }
+        } catch (err) { showToast('Löschen fehlgeschlagen: ' + err.message, 'error'); }
     });
 }
 
