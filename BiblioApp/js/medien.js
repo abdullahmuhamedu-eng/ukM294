@@ -124,7 +124,7 @@ async function saveMedium() {
 
     const gueltig = validateFormular([
         { input: titelInput, errorEl: document.getElementById('medium-titel-error'), regel: validateTitel, meldung: 'Titel darf nicht leer sein.' },
-        { input: autorInput, errorEl: document.getElementById('medium-autor-error'), regel: validateName,  meldung: 'Autor darf nur Buchstaben enthalten.' }
+        { input: autorInput, errorEl: document.getElementById('medium-autor-error'), regel: function(w) { return w.trim() === '' || validateName(w); }, meldung: 'Autor darf nur Buchstaben enthalten.' }
     ]);
     if (!gueltig) return;
 
