@@ -1,0 +1,95 @@
+<div class="sektion">
+  <div class="toolbar">
+    <h2 class="sektion-titel">Ausleihen</h2>
+    <div class="toolbar-suche">
+      <input class="search-input" [(ngModel)]="suchbegriff" (input)="suchen()" placeholder="Kunde suchen...">
+      <button class="btn btn--secondary" (click)="suchen()">Suchen</button>
+      <button class="btn btn--primary" (click)="neuOeffnen()">+ Neu</button>
+    </div>
+  </div>
+  <div class="table-container">
+    <table>
+      <thead><tr><th>ID</th><th>Medium</th><th>Kunde</th><th>Ausgeliehen am</th><th>Rückgabe bis</th><th>Aktionen</th></tr></thead>
+      <tbody>
+        @if (ladeStatus) { <tr><td colspan="6" class="loading">Lade...</td></tr> }
+        @else if (fehler) { <tr><td colspan="6" class="loading">Fehler beim Laden.</td></tr> }
+        @else if (gefiltert.length === 0) { <tr><td colspan="6" class="loading">Keine Ausleihen vorhanden</td></tr> }
+        @else {
+          @for (a of gefiltert; track a.id) {
+            <tr>
+              <td>{{ a.id }}</td>
+              <td><strong>{{ a.media?.title || '-' }}</strong></td>
+              <td>{{ a.customer?.firstName }} {{ a.customer?.lastName }}</td>
+              <td>{{ formatDatum(a.dateBorrowed) }}</td>
+              <td>{{ formatDatum(a.dueDate) }}</td>
+              <td>
+                <button class="btn btn--sm btn--secondary" (click)="verlaengernBestaetigen(a)">+14 Tage</button>
+                <button class="btn btn--sm btn--secondary" (click)="rueckgabeBestaetigen(a)">Rückgabe</button>
+                <button class="btn btn--sm btn--danger" (click)="loeschenBestaetigen(a)">Löschen</button>
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+@if (modalOffen) {
+  <div class="modal-overlay" (click)="modalOffen = false">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Neue Ausleihe erstellen</h2>
+        <button class="modal-close" (click)="modalOffen = false">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Kunde <span class="required">*</span></label>
+          <select class="form-select" [(ngModel)]="kundeId">
+            <option [ngValue]="null">-- Kunden wählen --</option>
+            @for (k of kunden; track k.id) {
+              <option [ngValue]="k.id">{{ k.firstName }} {{ k.lastName }} (ID: {{ k.id }})</option>
+            }
+          </select>
+          @if (fehlerFelder['kunde']) { <div class="form-error">{{ fehlerFelder['kunde'] }}</div> }
+        </div>
+        <div class="form-group">
+          <label class="form-label">Medium <span class="required">*</span></label>
+          <select class="form-select" [(ngModel)]="mediumId">
+            <option [ngValue]="null">-- Medium wählen --</option>
+            @for (m of verfuegbareMedian; track m.id) {
+              <option [ngValue]="m.id">{{ m.title }} (ID: {{ m.id }})</option>
+            }
+          </select>
+          @if (fehlerFelder['medium']) { <div class="form-error">{{ fehlerFelder['medium'] }}</div> }
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Ausleihdatum</label>
+            <input class="form-input" value="Wird automatisch gesetzt" disabled>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Rückgabe</label>
+            <input class="form-input" value="+14 Tage (automatisch)" disabled>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn--secondary" (click)="modalOffen = false">Abbrechen</button>
+        <button class="btn btn--primary" (click)="speichern()">Ausleihe erstellen</button>
+      </div>
+    </div>
+  </div>
+}
+
+@if (bestaetigung.offen) {
+  <div class="modal-overlay">
+    <div class="confirm-box">
+      <h3>{{ bestaetigung.titel }}</h3><p>{{ bestaetigung.text }}</p>
+      <div class="confirm-actions">
+        <button class="btn btn--secondary" (click)="bestaetigung.offen = false">Abbrechen</button>
+        <button class="btn btn--success" (click)="bestaetigen()">Ja, bestätigen</button>
+      </div>
+    </div>
+  </div>
+}

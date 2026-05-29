@@ -1,0 +1,79 @@
+<div class="sektion">
+  <div class="toolbar">
+    <h2 class="sektion-titel">Medien</h2>
+    <div class="toolbar-suche">
+      <input class="search-input" [(ngModel)]="suchbegriff" (input)="suchen()" placeholder="Titel suchen...">
+      <button class="btn btn--secondary" (click)="suchen()">Suchen</button>
+      <button class="btn btn--primary" (click)="neuOeffnen()">+ Neu</button>
+    </div>
+  </div>
+  <div class="table-container">
+    <table>
+      <thead><tr><th>ID</th><th>Titel</th><th>Autor</th><th>Genre</th><th>EAN</th><th>Standort</th><th>Rating</th><th>Aktionen</th></tr></thead>
+      <tbody>
+        @if (ladeStatus) { <tr><td colspan="8" class="loading">Lade...</td></tr> }
+        @else if (fehler) { <tr><td colspan="8" class="loading">Fehler beim Laden.</td></tr> }
+        @else if (gefiltert.length === 0) { <tr><td colspan="8" class="loading">Keine Medien vorhanden</td></tr> }
+        @else {
+          @for (m of gefiltert; track m.id) {
+            <tr>
+              <td>{{ m.id }}</td><td><strong>{{ m.title }}</strong></td>
+              <td>{{ m.author || '-' }}</td><td>{{ m.genre || '-' }}</td>
+              <td>{{ m.ean ?? '-' }}</td><td>{{ m.locationcode || '-' }}</td><td>{{ m.rating ?? '-' }}</td>
+              <td>
+                <button class="btn btn--sm btn--secondary" (click)="bearbeitenOeffnen(m)">Bearbeiten</button>
+                <button class="btn btn--sm btn--danger" (click)="loeschenBestaetigen(m)">Löschen</button>
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+@if (modalOffen) {
+  <div class="modal-overlay" (click)="modalOffen = false">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>{{ bearbeiten ? 'Medium bearbeiten' : 'Neues Medium erstellen' }}</h2>
+        <button class="modal-close" (click)="modalOffen = false">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Titel <span class="required">*</span></label>
+          <input class="form-input" [class.is-invalid]="titelFehler" [(ngModel)]="form.title" maxlength="100">
+          @if (titelFehler) { <div class="form-error">{{ titelFehler }}</div> }
+        </div>
+        <div class="form-group">
+          <label class="form-label">Autor</label>
+          <input class="form-input" [(ngModel)]="form.author" maxlength="100">
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Genre</label><input class="form-input" [(ngModel)]="form.genre" maxlength="40"></div>
+          <div class="form-group"><label class="form-label">Standort</label><input class="form-input" [(ngModel)]="form.locationcode" maxlength="20"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">EAN</label><input class="form-input" [(ngModel)]="form.ean" type="number"></div>
+          <div class="form-group"><label class="form-label">Rating</label><input class="form-input" [(ngModel)]="form.rating" type="number"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn--secondary" (click)="modalOffen = false">Abbrechen</button>
+        <button class="btn btn--primary" (click)="speichern()">Speichern</button>
+      </div>
+    </div>
+  </div>
+}
+
+@if (bestaetigung.offen) {
+  <div class="modal-overlay">
+    <div class="confirm-box">
+      <h3>{{ bestaetigung.titel }}</h3><p>{{ bestaetigung.text }}</p>
+      <div class="confirm-actions">
+        <button class="btn btn--secondary" (click)="bestaetigung.offen = false">Abbrechen</button>
+        <button class="btn btn--success" (click)="bestaetigen()">Ja, bestätigen</button>
+      </div>
+    </div>
+  </div>
+}

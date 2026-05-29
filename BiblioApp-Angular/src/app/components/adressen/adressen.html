@@ -1,0 +1,79 @@
+<div class="sektion">
+  <div class="toolbar">
+    <h2 class="sektion-titel">Adressen</h2>
+    <div class="toolbar-suche">
+      <input class="search-input" [(ngModel)]="suchbegriff" (input)="suchen()" placeholder="Strasse suchen...">
+      <button class="btn btn--secondary" (click)="suchen()">Suchen</button>
+      <button class="btn btn--primary" (click)="neuOeffnen()">+ Neu</button>
+    </div>
+  </div>
+  <div class="table-container">
+    <table>
+      <thead><tr><th>ID</th><th>Strasse</th><th>PLZ / Ort</th><th>Aktionen</th></tr></thead>
+      <tbody>
+        @if (ladeStatus) { <tr><td colspan="4" class="loading">Lade...</td></tr> }
+        @else if (fehler) { <tr><td colspan="4" class="loading">Fehler beim Laden.</td></tr> }
+        @else if (gefiltert.length === 0) { <tr><td colspan="4" class="loading">Keine Adressen vorhanden</td></tr> }
+        @else {
+          @for (a of gefiltert; track a.id) {
+            <tr>
+              <td>{{ a.id }}</td>
+              <td><strong>{{ a.street }}</strong></td>
+              <td>{{ a.zip }} {{ a.city }}</td>
+              <td>
+                <button class="btn btn--sm btn--secondary" (click)="bearbeitenOeffnen(a)">Bearbeiten</button>
+                <button class="btn btn--sm btn--danger" (click)="loeschenBestaetigen(a)">Löschen</button>
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+@if (modalOffen) {
+  <div class="modal-overlay" (click)="modalOffen = false">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>{{ bearbeiten ? 'Adresse bearbeiten' : 'Neue Adresse erstellen' }}</h2>
+        <button class="modal-close" (click)="modalOffen = false">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Strasse <span class="required">*</span></label>
+          <input class="form-input" [(ngModel)]="form.street" maxlength="60">
+          @if (fehlerFelder['street']) { <div class="form-error">{{ fehlerFelder['street'] }}</div> }
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">PLZ <span class="required">*</span></label>
+            <input class="form-input" [(ngModel)]="form.zip" maxlength="8">
+            @if (fehlerFelder['zip']) { <div class="form-error">{{ fehlerFelder['zip'] }}</div> }
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ort <span class="required">*</span></label>
+            <input class="form-input" [(ngModel)]="form.city" maxlength="40">
+            @if (fehlerFelder['city']) { <div class="form-error">{{ fehlerFelder['city'] }}</div> }
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn--secondary" (click)="modalOffen = false">Abbrechen</button>
+        <button class="btn btn--primary" (click)="speichern()">Speichern</button>
+      </div>
+    </div>
+  </div>
+}
+
+@if (bestaetigung.offen) {
+  <div class="modal-overlay">
+    <div class="confirm-box">
+      <h3>{{ bestaetigung.titel }}</h3><p>{{ bestaetigung.text }}</p>
+      <div class="confirm-actions">
+        <button class="btn btn--secondary" (click)="bestaetigung.offen = false">Abbrechen</button>
+        <button class="btn btn--success" (click)="bestaetigen()">Ja, bestätigen</button>
+      </div>
+    </div>
+  </div>
+}
