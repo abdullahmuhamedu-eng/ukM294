@@ -1,5 +1,6 @@
 /**
- * api.js - API-Anfragen an das Spring Boot Backend (Port 8080)
+ * api.js - Kapselt alle HTTP-Anfragen an das Spring Boot Backend (Port 8080).
+ * Alle CRUD-Operationen für Medien, Kunden, Adressen und Ausleihen laufen über sendRequest().
  * @author  Abdullah Muhamedu Hisham
  * @date    21.05.2026
  * @version 1.0

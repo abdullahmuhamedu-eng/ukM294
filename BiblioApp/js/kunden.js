@@ -1,5 +1,6 @@
 /**
- * kunden.js - CRUD-Logik für die Ressource Kunde
+ * kunden.js - CRUD-Logik für die Ressource Kunde (Laden, Anzeigen, Erstellen, Bearbeiten, Löschen).
+ * Beim Bearbeiten sind nur E-Mail und Adresse änderbar; andere Felder werden deaktiviert.
  * @author  Abdullah Muhamedu Hisham
  * @date    21.05.2026
  * @version 1.0

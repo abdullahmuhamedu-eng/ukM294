@@ -1,5 +1,6 @@
 /**
- * validierung.js - RegEx-Validierung und Input Sanitization
+ * validierung.js - Client-seitige RegEx-Validierung und Input Sanitization.
+ * Prüft Formulareingaben vor dem Absenden, um unnötige Backend-Anfragen zu vermeiden.
  * @author  Abdullah Muhamedu Hisham
  * @date    21.05.2026
  * @version 1.0

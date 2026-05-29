@@ -1,5 +1,6 @@
 /**
- * adressen.js - CRUD-Logik für die Ressource Adresse
+ * adressen.js - CRUD-Logik für die Ressource Adresse (Laden, Anzeigen, Erstellen, Bearbeiten, Löschen).
+ * Adressen werden von Kunden referenziert und müssen zuerst erfasst werden.
  * @author  Abdullah Muhamedu Hisham
  * @date    21.05.2026
  * @version 1.0

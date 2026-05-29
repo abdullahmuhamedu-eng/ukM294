@@ -1,5 +1,6 @@
 /**
- * medien.js - CRUD-Logik für die Ressource Medium
+ * medien.js - CRUD-Logik für die Ressource Medium (Laden, Anzeigen, Erstellen, Bearbeiten, Löschen).
+ * Validierung erfolgt vor jedem Speichern; API-Aufrufe nur bei gültigen Eingaben.
  * @author  Abdullah Muhamedu Hisham
  * @date    21.05.2026
  * @version 1.0

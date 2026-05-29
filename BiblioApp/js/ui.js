@@ -1,5 +1,6 @@
 /**
- * ui.js - Toast, Modal, Navigation und UI-Hilfsfunktionen
+ * ui.js - UI-Hilfsfunktionen für Toast-Nachrichten, Modals, Navigation und Statistik-Karten.
+ * Enthält keine Business-Logik – nur Darstellung und DOM-Manipulation.
  * @author  Abdullah Muhamedu Hisham
  * @date    21.05.2026
  * @version 1.0

@@ -1,5 +1,6 @@
 /**
- * app.js - Initialisierung und Event-Listener der BiblioApp
+ * app.js - Einstiegspunkt der BiblioApp: Initialisierung, Event-Listener und Navigation.
+ * Bindet alle Sektionen, Modals und Suchen zusammen; lädt beim Start nur Medien und Stats.
  * @author  Abdullah Muhamedu Hisham
  * @date    21.05.2026
  * @version 1.0

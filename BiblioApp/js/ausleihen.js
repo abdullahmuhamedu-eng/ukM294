@@ -1,5 +1,6 @@
 /**
- * ausleihen.js - CRUD-Logik für die Ressource Ausleihe
+ * ausleihen.js - CRUD-Logik für die Ressource Ausleihe (Laden, Erstellen, Verlängern, Rückgabe, Löschen).
+ * Im Dropdown werden nur verfügbare (nicht ausgeliehene) Medien angezeigt.
  * @author  Abdullah Muhamedu Hisham
  * @date    21.05.2026
  * @version 1.0
