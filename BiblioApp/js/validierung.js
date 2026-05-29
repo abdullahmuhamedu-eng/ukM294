@@ -26,12 +26,22 @@ function validateName(wert) {
     return /^[A-Za-zÀ-ÿäöüÄÖÜ\s\-\.,']+$/.test(t) && /[A-Za-zÀ-ÿäöüÄÖÜ]/.test(t);
 }
 
+/**
+ * Prüft ob ein Titel Buchstaben oder Ziffern enthält (Sonderzeichen erlaubt).
+ * @param {string} wert - Der zu prüfende Titel
+ * @returns {boolean} true wenn gültig
+ */
 function validateTitel(wert) {
     if (typeof wert !== 'string' || wert.trim().length === 0) return false;
     const t = wert.trim();
     return /^[A-Za-z0-9À-ÿäöüÄÖÜ\s\-\.,']+$/.test(t) && /[A-Za-z0-9À-ÿäöüÄÖÜ]/.test(t);
 }
 
+/**
+ * Prüft ob ein Wert eine positive Ganzzahl oder leer ist.
+ * @param {string} wert - Der zu prüfende Wert
+ * @returns {boolean} true wenn leer oder nur Ziffern
+ */
 function validateGanzzahl(wert) {
     if (wert.trim() === '') return true;
     return /^\d+$/.test(wert.trim());
@@ -123,4 +133,3 @@ function validateFormular(felder) {
     });
     return gueltig;
 }
-

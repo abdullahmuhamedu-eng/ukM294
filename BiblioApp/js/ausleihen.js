@@ -164,6 +164,10 @@ function confirmDeleteAusleihe(id) {
     });
 }
 
+/**
+ * Filtert die Ausleihen-Tabelle nach Kundenname.
+ * @returns {void}
+ */
 function searchAusleihen() {
     const suchbegriff = document.getElementById('ausleihen-suche').value.trim().toLowerCase();
     if (suchbegriff.length === 0) { renderAusleihenTabelle(ausleihenListe); return; }

@@ -13,7 +13,7 @@ const SEKTIONEN = {
 };
 
 /**
- * Laedt alle Stats-Zahlen fuer die Karten im Header.
+ * Lädt alle Stats-Zahlen für die Karten im Header.
  * @async
  * @returns {Promise<void>}
  */
@@ -33,7 +33,7 @@ async function ladeStats() {
 }
 
 /**
- * Wechselt zur angegebenen Sektion und laedt die Daten.
+ * Wechselt zur angegebenen Sektion und lädt die Daten.
  * @async
  * @param {string} sektionId - ID der Sektion
  * @returns {Promise<void>}
@@ -47,7 +47,7 @@ async function switchSektion(sektionId) {
 }
 
 /**
- * Oeffnet das passende Erstellen-Modal fuer die aktive Sektion.
+ * Öffnet das passende Erstellen-Modal für die aktive Sektion.
  * @async
  * @returns {Promise<void>}
  */
@@ -158,4 +158,3 @@ document.addEventListener('DOMContentLoaded', async function() {
     await renderMedien();
     ladeStats();
 });
-

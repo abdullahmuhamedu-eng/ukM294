@@ -1,5 +1,5 @@
 /**
- * medien.js - CRUD-Logik fuer die Ressource Medium
+ * medien.js - CRUD-Logik für die Ressource Medium
  * @author  Abdullah Muhamedu Hisham
  * @date    21.05.2026
  * @version 1.0
@@ -9,7 +9,7 @@ let medienListe = [];
 let currentMediumId = null;
 
 /**
- * Laedt alle Medien vom Backend und zeigt sie in der Tabelle an.
+ * Lädt alle Medien vom Backend und zeigt sie in der Tabelle an.
  * @async
  * @returns {Promise<void>}
  */
@@ -28,7 +28,7 @@ async function renderMedien() {
 }
 
 /**
- * Rendert die Medien-Tabelle mit den uebergebenen Daten.
+ * Rendert die Medien-Tabelle mit den übergebenen Daten.
  * @param {Array} liste - Liste der Medien-Objekte
  * @returns {void}
  */
@@ -69,7 +69,7 @@ async function searchMedien() {
 }
 
 /**
- * Oeffnet das Modal zum Erstellen eines neuen Mediums.
+ * Öffnet das Modal zum Erstellen eines neuen Mediums.
  * @returns {void}
  */
 function openCreateMediumModal() {
@@ -81,7 +81,7 @@ function openCreateMediumModal() {
 }
 
 /**
- * Oeffnet das Modal zum Bearbeiten eines bestehenden Mediums.
+ * Öffnet das Modal zum Bearbeiten eines bestehenden Mediums.
  * @param {number} id - ID des zu bearbeitenden Mediums
  * @returns {void}
  */
@@ -153,9 +153,9 @@ async function saveMedium() {
 }
 
 /**
- * Zeigt Bestaetigungsdialog und loescht ein Medium nach Bestaetigung.
- * @param {number} id   - ID des zu loeschenden Mediums
- * @param {string} name - Titel des Mediums fuer die Bestaetigung
+ * Zeigt Bestätigungsdialog und löscht ein Medium nach Bestätigung.
+ * @param {number} id   - ID des zu löschenden Mediums
+ * @param {string} name - Titel des Mediums für die Bestätigung
  * @returns {void}
  */
 function confirmDeleteMedium(id, name) {

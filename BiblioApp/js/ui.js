@@ -6,7 +6,7 @@
  */
 
 /**
- * Escaped einen String gegen XSS fuer sichere innerHTML-Ausgabe.
+ * Escaped einen String gegen XSS für sichere innerHTML-Ausgabe.
  * @param {string} str - Der zu escapende String
  * @returns {string} Escapeter String
  */
@@ -19,8 +19,8 @@ function escHtml(str) {
 }
 
 /**
- * Gibt den Wert escaped zurueck oder '-' wenn leer oder null.
- * @param {*} wert - Der zu pruefende Wert
+ * Gibt den Wert escaped zurück oder '-' wenn leer oder null.
+ * @param {*} wert - Der zu prüfende Wert
  * @returns {string} Escapeter Wert oder '-'
  */
 function orDash(wert) {
@@ -28,7 +28,7 @@ function orDash(wert) {
 }
 
 /**
- * Zeigt eine Toast-Benachrichtigung fuer 3.5 Sekunden an.
+ * Zeigt eine Toast-Benachrichtigung für 3.5 Sekunden an.
  * @param {string} meldung - Anzuzeigende Nachricht
  * @param {string} typ     - Toast-Typ: success, error, warning
  * @returns {void}
@@ -43,7 +43,7 @@ function showToast(meldung, typ) {
 }
 
 /**
- * Oeffnet ein Modal anhand seiner ID.
+ * Öffnet ein Modal anhand seiner ID.
  * @param {string} modalId - ID des Modals
  * @returns {void}
  */
@@ -52,7 +52,7 @@ function showModal(modalId) {
 }
 
 /**
- * Schliesst ein Modal anhand seiner ID.
+ * Schließt ein Modal anhand seiner ID.
  * @param {string} modalId - ID des Modals
  * @returns {void}
  */
@@ -61,7 +61,7 @@ function hideModal(modalId) {
 }
 
 /**
- * Schliesst alle offenen Modals.
+ * Schließt alle offenen Modals.
  * @returns {void}
  */
 function hideAllModals() {
@@ -69,10 +69,10 @@ function hideAllModals() {
 }
 
 /**
- * Zeigt einen Bestaetigungsdialog an.
+ * Zeigt einen Bestätigungsdialog an.
  * @param {string}   titel     - Titel des Dialogs
  * @param {string}   text      - Beschreibungstext
- * @param {Function} onConfirm - Funktion die bei Bestaetigung aufgerufen wird
+ * @param {Function} onConfirm - Funktion die bei Bestätigung aufgerufen wird
  * @returns {void}
  */
 function showConfirm(titel, text, onConfirm) {
@@ -102,9 +102,9 @@ function navigateTo(sektionId) {
 }
 
 /**
- * Aktualisiert den Zaehler eines Navigations-Eintrags.
+ * Aktualisiert den Zähler eines Navigations-Eintrags.
  * @param {string} sektionId - ID der Sektion
- * @param {number} anzahl    - Anzahl der Eintraege
+ * @param {number} anzahl    - Anzahl der Einträge
  * @returns {void}
  */
 function updateNavCount(sektionId, anzahl) {
@@ -134,5 +134,3 @@ function formatDatum(datum) {
     if (t.length !== 3) return datum;
     return t[2] + '.' + t[1] + '.' + t[0];
 }
-
-

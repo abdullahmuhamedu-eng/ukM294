@@ -1,5 +1,5 @@
 /**
- * kunden.js - CRUD-Logik fuer die Ressource Kunde
+ * kunden.js - CRUD-Logik für die Ressource Kunde
  * @author  Abdullah Muhamedu Hisham
  * @date    21.05.2026
  * @version 1.0
@@ -9,7 +9,7 @@ let kundenListe = [];
 let currentKundeId = null;
 
 /**
- * Laedt alle Kunden vom Backend und zeigt sie in der Tabelle an.
+ * Lädt alle Kunden vom Backend und zeigt sie in der Tabelle an.
  * @async
  * @returns {Promise<void>}
  */
@@ -28,7 +28,7 @@ async function renderKunden() {
 }
 
 /**
- * Rendert die Kunden-Tabelle mit den uebergebenen Daten.
+ * Rendert die Kunden-Tabelle mit den übergebenen Daten.
  * @param {Array} liste - Liste der Kunden-Objekte
  * @returns {void}
  */
@@ -55,7 +55,7 @@ function renderKundenTabelle(liste) {
 }
 
 /**
- * Befuellt das Adressen-Dropdown im Kunden-Formular.
+ * Befüllt das Adressen-Dropdown im Kunden-Formular.
  * @async
  * @returns {Promise<void>}
  */
@@ -74,7 +74,7 @@ async function fillAdressenDropdown() {
 }
 
 /**
- * Konvertiert Datum von TT.MM.JJJJ zu JJJJ-MM-TT fuer das Backend.
+ * Konvertiert Datum von TT.MM.JJJJ zu JJJJ-MM-TT für das Backend.
  * @param {string} datum - Datum im Format TT.MM.JJJJ
  * @returns {string} Datum im Format JJJJ-MM-TT oder leerer String bei Fehler
  */
@@ -85,7 +85,7 @@ function datumZuIso(datum) {
 }
 
 /**
- * Konvertiert Datum von JJJJ-MM-TT zu TT.MM.JJJJ fuer die Anzeige.
+ * Konvertiert Datum von JJJJ-MM-TT zu TT.MM.JJJJ für die Anzeige.
  * @param {string} datum - Datum im Format JJJJ-MM-TT
  * @returns {string} Datum im Format TT.MM.JJJJ
  */
@@ -97,9 +97,9 @@ function datumZuAnzeige(datum) {
 }
 
 /**
- * Prueft ob ein Datum im Format TT.MM.JJJJ gueltig ist.
- * @param {string} datum - Das zu pruefende Datum
- * @returns {boolean} true wenn gueltig
+ * Prüft ob ein Datum im Format TT.MM.JJJJ gültig ist.
+ * @param {string} datum - Das zu prüfende Datum
+ * @returns {boolean} true wenn gültig
  */
 function validateDatumAnzeige(datum) {
     if (!/^\d{2}\.\d{2}\.\d{4}$/.test(datum.trim())) return false;
@@ -109,7 +109,7 @@ function validateDatumAnzeige(datum) {
 }
 
 /**
- * Oeffnet das Modal zum Erstellen eines neuen Kunden.
+ * Öffnet das Modal zum Erstellen eines neuen Kunden.
  * @async
  * @returns {Promise<void>}
  */
@@ -124,7 +124,7 @@ async function openCreateKundeModal() {
 }
 
 /**
- * Oeffnet das Modal zum Bearbeiten eines bestehenden Kunden.
+ * Öffnet das Modal zum Bearbeiten eines bestehenden Kunden.
  * @async
  * @param {number} id - ID des zu bearbeitenden Kunden
  * @returns {Promise<void>}
@@ -146,7 +146,7 @@ async function openEditKundeModal(id) {
 }
 
 /**
- * Aktiviert oder deaktiviert die nicht aenderbaren Felder.
+ * Aktiviert oder deaktiviert die nicht änderbaren Felder.
  * @param {boolean} aktiv - true = alle Felder aktiv
  * @returns {void}
  */
@@ -166,7 +166,7 @@ function clearKundeErrors() {
 }
 
 /**
- * Schliesst das Kunden-Modal.
+ * Schließt das Kunden-Modal.
  * @returns {void}
  */
 function closeKundeModal() {
@@ -218,9 +218,9 @@ async function saveKunde() {
 }
 
 /**
- * Zeigt Bestaetigungsdialog und loescht einen Kunden nach Bestaetigung.
- * @param {number} id   - ID des zu loeschenden Kunden
- * @param {string} name - Name des Kunden fuer die Bestaetigung
+ * Zeigt Bestätigungsdialog und löscht einen Kunden nach Bestätigung.
+ * @param {number} id   - ID des zu löschenden Kunden
+ * @param {string} name - Name des Kunden für die Bestätigung
  * @returns {void}
  */
 function confirmDeleteKunde(id, name) {
@@ -234,9 +234,8 @@ function confirmDeleteKunde(id, name) {
 }
 
 /**
- * Sucht Kunden nach Nachname und aktualisiert die Tabelle.
- * @async
- * @returns {Promise<void>}
+ * Filtert die Kunden-Tabelle nach Name (Vorname, Nachname oder beides).
+ * @returns {void}
  */
 function searchKunden() {
     const suchbegriff = document.getElementById('kunden-suche').value.trim().toLowerCase();

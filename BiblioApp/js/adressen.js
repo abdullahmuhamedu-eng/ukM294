@@ -133,6 +133,10 @@ function confirmDeleteAdresse(id, name) {
     });
 }
 
+/**
+ * Filtert die Adressen-Tabelle nach Suchbegriff (Strasse, PLZ, Ort).
+ * @returns {void}
+ */
 function searchAdressen() {
     const suchbegriff = document.getElementById('adressen-suche').value.trim().toLowerCase();
     if (suchbegriff.length === 0) { renderAdressenTabelle(adressenListe); return; }
