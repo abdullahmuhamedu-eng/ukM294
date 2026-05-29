@@ -40,7 +40,6 @@ async function ladeStats() {
  */
 async function switchSektion(sektionId) {
     navigateTo(sektionId);
-    document.getElementById('topbar-titel').textContent = SEKTIONEN[sektionId].titel;
     if (sektionId === 'medien')    await renderMedien();
     if (sektionId === 'kunden')    await renderKunden();
     if (sektionId === 'adressen')  await renderAdressen();

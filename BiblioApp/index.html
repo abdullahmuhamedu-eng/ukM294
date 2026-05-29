@@ -215,7 +215,6 @@
 
     <!-- Header -->
     <div class="app-header">
-      <h1 id="topbar-titel">Medien</h1>
       <div class="header-right">
         <button id="btn-neu" class="btn btn--primary">+ Neu</button>
         <div class="admin-badge">Admin</div>
@@ -241,6 +240,7 @@
     <!-- Sektion Medien -->
     <div id="sektion-medien" class="sektion">
       <div class="toolbar">
+        <h2 class="sektion-titel">Medien</h2>
         <input id="medien-suche" type="text" class="search-input" placeholder="Titel suchen...">
         <button id="medien-suche-btn" class="btn btn--secondary">Suchen</button>
       </div>
@@ -255,7 +255,8 @@
     <!-- Sektion Kunden -->
     <div id="sektion-kunden" class="sektion is-hidden">
       <div class="toolbar">
-        <input id="kunden-suche" type="text" class="search-input" placeholder="Nachname suchen...">
+        <h2 class="sektion-titel">Kunden</h2>
+        <input id="kunden-suche" type="text" class="search-input" placeholder="Name suchen...">
         <button id="kunden-suche-btn" class="btn btn--secondary">Suchen</button>
       </div>
       <div class="table-container">
@@ -268,6 +269,9 @@
 
     <!-- Sektion Adressen -->
     <div id="sektion-adressen" class="sektion is-hidden">
+      <div class="toolbar">
+        <h2 class="sektion-titel">Adressen</h2>
+      </div>
       <div class="table-container">
         <table>
           <thead><tr><th>ID</th><th>Strasse</th><th>PLZ / Ort</th><th>Aktionen</th></tr></thead>
@@ -278,6 +282,9 @@
 
     <!-- Sektion Ausleihen -->
     <div id="sektion-ausleihen" class="sektion is-hidden">
+      <div class="toolbar">
+        <h2 class="sektion-titel">Ausleihen</h2>
+      </div>
       <div class="table-container">
         <table>
           <thead><tr><th>ID</th><th>Medium</th><th>Kunde</th><th>Ausgeliehen am</th><th>Rückgabe bis</th><th>Aktionen</th></tr></thead>
