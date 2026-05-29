@@ -163,3 +163,15 @@ function confirmDeleteAusleihe(id) {
         } catch (err) { showToast('Löschen fehlgeschlagen: ' + err.message, 'error'); }
     });
 }
+
+function searchAusleihen() {
+    const suchbegriff = document.getElementById('ausleihen-suche').value.trim().toLowerCase();
+    if (suchbegriff.length === 0) { renderAusleihenTabelle(ausleihenListe); return; }
+    const ergebnis = ausleihenListe.filter(function(a) {
+        const vorname  = a.customer ? (a.customer.firstName || '').toLowerCase() : '';
+        const nachname = a.customer ? (a.customer.lastName  || '').toLowerCase() : '';
+        return vorname.includes(suchbegriff) || nachname.includes(suchbegriff)
+            || (vorname + ' ' + nachname).includes(suchbegriff);
+    });
+    renderAusleihenTabelle(ergebnis);
+}

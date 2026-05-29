@@ -74,6 +74,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     document.getElementById('medien-suche-btn').addEventListener('click', searchMedien);
     document.getElementById('kunden-suche').addEventListener('input', searchKunden);
     document.getElementById('kunden-suche-btn').addEventListener('click', searchKunden);
+    document.getElementById('adressen-suche').addEventListener('input', searchAdressen);
+    document.getElementById('adressen-suche-btn').addEventListener('click', searchAdressen);
+    document.getElementById('ausleihen-suche').addEventListener('input', searchAusleihen);
+    document.getElementById('ausleihen-suche-btn').addEventListener('click', searchAusleihen);
 
     // Modal Medium
     document.getElementById('medium-modal-close').addEventListener('click',  function() { hideModal('medium-modal'); });

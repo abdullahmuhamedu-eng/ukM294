@@ -132,3 +132,14 @@ function confirmDeleteAdresse(id, name) {
         } catch (err) { showToast('Löschen fehlgeschlagen: ' + err.message, 'error'); }
     });
 }
+
+function searchAdressen() {
+    const suchbegriff = document.getElementById('adressen-suche').value.trim().toLowerCase();
+    if (suchbegriff.length === 0) { renderAdressenTabelle(adressenListe); return; }
+    const ergebnis = adressenListe.filter(function(a) {
+        return (a.street || '').toLowerCase().includes(suchbegriff)
+            || (a.city  || '').toLowerCase().includes(suchbegriff)
+            || (a.zip   || '').toLowerCase().includes(suchbegriff);
+    });
+    renderAdressenTabelle(ergebnis);
+}
